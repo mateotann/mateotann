@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mateo tannahill</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="loading-screen" id="loadingScreen" aria-hidden="true">
+    <div class="loading-copy">
+      <p>'20-'26</p>
+      <p>yyz - ykf - sfo</p>
+      <p>film / travel / design</p>
+      <p>type portfolio</p>
+      <p>year 2026</p>
+      <p class="loading-name">[ mateo tannahill ]</p>
+    </div>
+  </div>
+
+  <div class="circle-cursor" id="fishCursor" aria-hidden="true"></div>
+
+  <button class="cat-companion is-sleeping" id="catCompanion" aria-label="wake the cat">
+    <span class="cat-sleeping">
+      <img src="assets/ui/cat-sleep.svg" alt="" />
+    </span>
+    <span class="cat-sitting">
+      <img src="assets/ui/cat-sit.svg" alt="" />
+    </span>
+    <span class="cat-walking cat-frame-a">
+      <img src="assets/ui/cat-walk-a.svg" alt="" />
+    </span>
+    <span class="cat-walking cat-frame-b">
+      <img src="assets/ui/cat-walk-b.svg" alt="" />
+    </span>
+  </button>
+
+  <header class="site-header intro-reveal">
+    <a class="brand" href="#top" aria-label="mateo tannahill">
+      <img class="brand-final" src="assets/ui/mateo-header-wordmark.svg" alt="mateo tannahill" />
+    </a>
+
+    <nav class="site-nav" aria-label="primary">
+      <a href="#top">me</a>
+      <a href="#gallery">gallery</a>
+      <a href="#life">life</a>
+    </nav>
+
+    <div class="header-socials" aria-label="social links">
+      <a class="email-link" href="mailto:Mateotann2007@outlook.com">mateotann2007@outlook.com</a>
+      <a class="social-link" href="https://www.youtube.com/@mateotannn/search" target="_blank" rel="noreferrer" aria-label="youtube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.98 2.98 0 0 0-2.09-2.1C17.63 4.6 12 4.6 12 4.6s-5.63 0-7.49.49a2.98 2.98 0 0 0-2.09 2.1A31.2 31.2 0 0 0 2 12a31.2 31.2 0 0 0 .42 4.81 2.98 2.98 0 0 0 2.09 2.1c1.86.49 7.49.49 7.49.49s5.63 0 7.49-.49a2.98 2.98 0 0 0 2.09-2.1A31.2 31.2 0 0 0 22 12a31.2 31.2 0 0 0-.42-4.81M10 15.5v-7l6 3.5z"/></svg>
+      </a>
+      <a class="social-link" href="https://www.linkedin.com/in/mateo-tannahill-74b795386/" target="_blank" rel="noreferrer" aria-label="linkedin">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38 1.56 1.56 0 0 1 6.94 8.5M5.6 9.75h2.67V18H5.6Zm4.34 0h2.56v1.13h.04c.36-.68 1.22-1.4 2.5-1.4 2.67 0 3.16 1.76 3.16 4.05V18h-2.67v-3.95c0-.94-.02-2.15-1.31-2.15-1.31 0-1.51 1.03-1.51 2.08V18H9.94Z"/></svg>
+      </a>
+      <a class="social-link" href="https://x.com/mateotannn" target="_blank" rel="noreferrer" aria-label="x">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3H21l-4.58 5.23L21.8 21h-4.77l-3.74-4.9L9 21H6.9l4.9-5.6L2.65 3h4.89l3.38 4.47Zm-.84 16.56h1.16L6.9 4.35H5.66Z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-stage">
+        <div class="hero-reel">
+          <video id="heroReelVideo" autoplay muted loop playsinline preload="auto">
+            <source src="assets/videos/website-web.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="hero-copy intro-reveal" id="me">
+          <div class="hero-label-row">
+            <span class="handle">@mateotannn</span>
+          </div>
+          <div class="hero-wordmark" aria-label="mateo tannahill">
+            <span>mateo tannahill</span>
+          </div>
+          <p class="hero-subtitle">i make videos</p>
+          <p class="hero-text">
+            first year at the university of waterloo. i like traveling, making things that feel
+            deliberate, and building video work that is personal, clean, and cinematic.
+          </p>
+        </div>
+
+        <div class="hero-reel-ui intro-reveal" aria-hidden="true">
+          <div class="hero-filmstrip" id="heroFilmstrip"></div>
+          <div class="hero-reel-track">
+            <span class="hero-reel-progress" id="heroReelProgress"></span>
+            <span class="hero-reel-marker" id="heroReelMarker"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="section-heading reveal-up">
+        <p class="eyebrow">gallery</p>
+        <h2>my work</h2>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card reveal-up">
+          <a class="project-visual project-video" href="chrono.html" aria-label="open chrono">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/videos/chrono-web.mp4" type="video/mp4" />
+            </video>
+          </a>
+          <h3>chrono</h3>
+          <p>figma designathon launch film</p>
+        </article>
+
+        <article class="project-card reveal-up">
+          <a class="project-visual project-video" href="ghostwriterrr.html" aria-label="open ghostwriterrr.com">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/videos/ghostwriterrr-prod-launch.mp4" type="video/mp4" />
+            </video>
+          </a>
+          <h3>ghostwriterrr.com</h3>
+          <p>sf product launch</p>
+        </article>
+
+        <article class="project-card reveal-up">
+          <a class="project-visual project-video" href="cuba.html" aria-label="open cuba">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/videos/cuba.mp4" type="video/mp4" />
+            </video>
+          </a>
+          <h3>cuba</h3>
+          <p>personal film</p>
+        </article>
+
+        <article class="project-card reveal-up">
+          <a class="project-visual project-video" href="pokemon.html" aria-label="open pokemon launch ad">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/videos/pokemon-promo-web.mp4" type="video/mp4" />
+            </video>
+          </a>
+          <h3>pokemon launch ad</h3>
+          <p>short website launch ad</p>
+        </article>
+
+        <article class="project-card reveal-up">
+          <a class="project-visual project-video" href="through-my-eyes.html" aria-label="open 2025 through my eyes">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/videos/website-web.mp4" type="video/mp4" />
+            </video>
+          </a>
+          <h3>2025 through my eyes</h3>
+          <p>personal recap</p>
+        </article>
+
+        <article class="project-card reveal-up">
+          <a class="project-visual project-video" href="niagara-glen.html" aria-label="open niagara glen w/ wloocc">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/videos/niagara-glen-recap.mp4" type="video/mp4" />
+            </video>
+          </a>
+          <h3>niagara glen w/ wloocc</h3>
+          <p>cinematic recap</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="life" id="life">
+      <div class="section-heading reveal-up">
+        <p class="eyebrow">life</p>
+      </div>
+
+      <div class="life-scene reveal-up" id="lifeScene">
+        <div class="life-copy life-copy-visual" id="lifeStatement" aria-hidden="true">
+          <p>i make videos and i'm inspired by the beauty of things around me</p>
+        </div>
+
+        <div class="collage-board" id="collageBoard" aria-label="draggable life collage">
+          <article class="collage-card collage-photo" data-layer="back" data-zone="left" data-x="256" data-y="30" style="--w: 332px; --h: 248px; --r: 3deg;">
+            <img src="assets/life/sf-street.jpg" alt="san francisco street" />
+          </article>
+          <article class="collage-card collage-photo" data-layer="back" data-zone="right" data-x="978" data-y="30" style="--w: 308px; --h: 214px; --r: -4deg;">
+            <img src="assets/life/IMG_3598.jpg" alt="beach at dusk" />
+          </article>
+          <article class="collage-card collage-object" data-layer="front" data-zone="top" data-x="632" data-y="54" style="--w: 188px; --h: 218px; --r: -7deg;">
+            <img src="assets/life/selvedge-denim.png" alt="selvedge denim" />
+          </article>
+          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-x="822" data-y="204" style="--w: 188px; --h: 196px; --r: 6deg;">
+            <img src="assets/life/camera-cutout.png" alt="sony camera cutout" />
+          </article>
+          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-x="1116" data-y="266" style="--w: 124px; --h: 124px; --r: 4deg;">
+            <img src="assets/life/matcha.png" alt="matcha" />
+          </article>
+          <article class="collage-card collage-photo collage-photo-strip is-tall" data-layer="back" data-zone="left" data-x="78" data-y="422" style="--w: 92px; --h: 316px; --r: -4deg;">
+            <img src="assets/life/photo-strip-single-cutout.png" alt="single photo strip" />
+          </article>
+          <article class="collage-card collage-object" data-layer="back" data-zone="center" data-x="500" data-y="332" style="--w: 178px; --h: 178px; --r: 7deg;">
+            <img src="assets/life/arcteryx-bag.png" alt="arcteryx bag" />
+          </article>
+          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-x="850" data-y="402" style="--w: 156px; --h: 180px; --r: 7deg;">
+            <img src="assets/life/hirono.png" alt="green hirono figure" />
+          </article>
+          <article class="collage-card collage-photo collage-photo-strip is-tall" data-layer="back" data-zone="left" data-x="260" data-y="514" style="--w: 246px; --h: 312px; --r: 5deg;">
+            <img src="assets/life/photo-strips-group-cutout.png" alt="group photo strips" />
+          </article>
+          <article class="collage-card collage-photo collage-photo-cropped" data-layer="back" data-zone="right" data-x="1050" data-y="506" style="--w: 176px; --h: 176px; --r: -2deg;">
+            <img src="assets/life/blonde-cover.jpeg" alt="frank ocean blonde album cover" />
+          </article>
+          <article class="collage-card collage-photo" data-layer="front" data-zone="right" data-x="1244" data-y="470" style="--w: 170px; --h: 258px; --r: 4deg;">
+            <img src="assets/life/past-lives-poster.jpg" alt="past lives movie poster" />
+          </article>
+          <article class="collage-card collage-photo" data-layer="back" data-zone="bottom" data-x="558" data-y="786" style="--w: 392px; --h: 252px; --r: 3deg;">
+            <img src="assets/life/coastal-road.jpg" alt="coastal road at sunset" />
+          </article>
+        </div>
+        <div class="collage-promoted-layer" id="collagePromotedLayer" aria-hidden="true"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-copy">@2026 mateo tannahill</p>
+    <p class="footer-meta">designed in figma. built with html, css, and js. shaped by travel, film, and late-night edits.</p>
+    <div class="footer-polaroid" tabindex="0" aria-label="photo of mateo in san francisco">
+      <div class="polaroid-photo"></div>
+      <p>mateo, 2026</p>
+      <div class="polaroid-note">me the first time i went to sf, visiting the golden gate bridge.</div>
+    </div>
+  </footer>
+
+  <div class="polaroid-backdrop" id="polaroidBackdrop" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
