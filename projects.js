@@ -3,38 +3,39 @@ window.PROJECTS = {
     slug: "chrono",
     pageTitle: "chrono | mateo tannahill",
     title: "chrono",
-    category: "figma designathon launch film",
+    category: "figbuild 2026 designathon product launch",
     videoSrc: "assets/videos/chrono-web.mp4",
     videoType: "video/mp4",
-    description: [
-      "launch film for chrono, built for a figma designathon where we placed second. the piece was shaped around a quick product story, clean pacing, and making the rollout feel more cinematic than a typical hackathon launch.",
-      "this page is set up so we can swap in your real stills and behind-the-scenes selects later without changing the layout."
+    copy: [
+      "chrono was our second-place winner at this year's figbuild designathon. i storyboarded, shot, and edited the launch film in under 24 hours while the product itself went from idea to submission in less than three days.",
+      "i wanted it to feel more cinematic than a normal hackathon demo, so the piece leans on tighter framing, low-light texture, and a slower build into the product story.",
+      "<a href=\"https://devpost.com/software/chrono-pyad5j\" target=\"_blank\" rel=\"noreferrer\">see the full devpost project</a>"
     ],
+    galleryIntro: "",
     gallery: [
-      { src: "assets/life/sf-street.jpg", alt: "chrono still placeholder 1" },
-      { src: "assets/life/golden-gate.jpg", alt: "chrono behind the scenes placeholder 1" },
-      { src: "assets/life/coastal-road.jpg", alt: "chrono still placeholder 2", wide: true },
-      { src: "assets/life/IMG_3598.jpg", alt: "chrono behind the scenes placeholder 2" },
-      { src: "assets/life/ocean-dusk.jpg", alt: "chrono still placeholder 3" }
+      { src: "assets/projects/chrono/still-01.jpg", alt: "close-up frame from chrono", wide: true },
+      { src: "assets/projects/chrono/still-02.jpg", alt: "cafe reflection frame from chrono" },
+      { src: "assets/projects/chrono/still-04.jpg", alt: "phone reflection frame from chrono", wide: true },
+      { src: "assets/projects/chrono/still-03.jpg", alt: "chrono title frame" }
     ]
   },
   ghostwriterrr: {
     slug: "ghostwriterrr",
     pageTitle: "ghostwriterrr.com | mateo tannahill",
     title: "ghostwriterrr.com",
-    category: "sf product launch",
-    videoSrc: "assets/videos/ghostwriterrr-prod-launch.mp4",
+    category: "product launch",
+    videoSrc: "assets/videos/ghostwriterrr-prod-launch-v3.mp4",
     videoType: "video/mp4",
-    description: [
-      "product launch video for ghostwriterrr.com after being flown out to san francisco. it was built to feel polished, fast, and founder-led while still keeping the product front and center.",
-      "the layout below mirrors the new project-page structure: hero video first, then context, then a visual gallery for stills and BTS selects."
+    copy: [
+      "product launch done for a client's first deployment of their product. i worked closely with the client to understand their overall vision, then helped shape the creative direction from storyboarding through pre-production planning before landing in san francisco, where i filmed and edited the full piece myself.",
+      "it was built to feel polished, fast, and founder-led while still keeping the product front and center. <a href=\"https://www.linkedin.com/in/reneezhang23\" target=\"_blank\" rel=\"noreferrer\">see the full product and story behind the shoot on renee zhang's linkedin</a>"
     ],
     gallery: [
-      { src: "assets/life/golden-gate.jpg", alt: "ghostwriterrr still placeholder 1", wide: true },
-      { src: "assets/life/sf-street.jpg", alt: "ghostwriterrr behind the scenes placeholder 1" },
-      { src: "assets/life/IMG_3598.jpg", alt: "ghostwriterrr still placeholder 2" },
-      { src: "assets/life/coastal-road.jpg", alt: "ghostwriterrr behind the scenes placeholder 2", wide: true },
-      { src: "assets/life/ocean-dusk.jpg", alt: "ghostwriterrr still placeholder 3" }
+      { src: "assets/projects/ghostwriterrr/still-01.jpg", alt: "ghostwriterrr frame still in the park", wide: true },
+      { src: "assets/projects/ghostwriterrr/still-02.jpg", alt: "ghostwriterrr post-it note still" },
+      { src: "assets/projects/ghostwriterrr/still-03.png", alt: "ghostwriterrr headphones still" },
+      { src: "assets/projects/ghostwriterrr/still-04.jpg", alt: "ghostwriterrr typing close-up still", wide: true },
+      { src: "assets/projects/ghostwriterrr/still-05.png", alt: "ghostwriterrr working at laptop still" }
     ]
   },
   cuba: {
@@ -44,35 +45,32 @@ window.PROJECTS = {
     category: "personal film",
     videoSrc: "assets/videos/cuba.mp4",
     videoType: "video/mp4",
-    description: [
-      "personal creative film shot in cuba. this one leans more into atmosphere, pacing, and the feeling of being there than into a hard narrative beat.",
-      "i kept the project page quieter so the motion piece stays dominant first and the image gallery lands underneath as supporting context."
+    copy: [
+      "personal creative film, shot in cuba, scored with frank ocean's <a href=\"https://www.youtube.com/watch?v=Dlz_XHeUUis\" target=\"_blank\" rel=\"noreferrer\">white ferrari</a>.",
+      "frank ocean is one of my favourite artists and inspires much of my cinematic creative work. i wanted this piece to focus on the atmosphere, beautiful views, and the feeling of being there in cuba."
     ],
     gallery: [
-      { src: "assets/life/ocean-dusk.jpg", alt: "cuba still placeholder 1" },
-      { src: "assets/life/coastal-road.jpg", alt: "cuba still placeholder 2", wide: true },
-      { src: "assets/life/IMG_3598.jpg", alt: "cuba behind the scenes placeholder 1" },
-      { src: "assets/life/golden-gate.jpg", alt: "cuba behind the scenes placeholder 2" },
-      { src: "assets/life/sf-street.jpg", alt: "cuba still placeholder 3" }
+      { src: "assets/projects/cuba/still-01.png", alt: "cuba title frame at sunset", wide: true },
+      { src: "assets/projects/cuba/still-02.png", alt: "cuba beach walkway at golden hour" },
+      { src: "assets/projects/cuba/still-03.png", alt: "cuba beach swing at sunset", wide: true }
     ]
   },
   pokemon: {
     slug: "pokemon",
     pageTitle: "pokemon launch ad | mateo tannahill",
     title: "pokemon launch ad",
-    category: "short website launch ad",
+    category: "website launch ad",
     videoSrc: "assets/videos/pokemon-promo-web.mp4",
     videoType: "video/mp4",
-    description: [
-      "short launch ad for a pokemon brand in the gta, cut to feel quick, sharp, and built for the web. the rhythm here is intentionally tighter and more direct.",
-      "the page gives it more room than the old modal, while still keeping the overall site language consistent."
+    copy: [
+      "first spec ad shoot for a smaller pokemon business based in the gta that was launching its online website after previously operating only through a storefront. i was given full creative freedom to develop the concept, actors, and storyboard from the ground up.",
+      "i directed, filmed, shot, edited, and handled sound design for the piece. it was cut to feel quick, sharp, and built for the target audience of teens."
     ],
     gallery: [
-      { src: "assets/life/IMG_3598.jpg", alt: "pokemon launch ad still placeholder 1" },
-      { src: "assets/life/sf-street.jpg", alt: "pokemon launch ad behind the scenes placeholder 1" },
-      { src: "assets/life/coastal-road.jpg", alt: "pokemon launch ad still placeholder 2", wide: true },
-      { src: "assets/life/ocean-dusk.jpg", alt: "pokemon launch ad behind the scenes placeholder 2" },
-      { src: "assets/life/golden-gate.jpg", alt: "pokemon launch ad still placeholder 3" }
+      { src: "assets/projects/pokemon/still-01.png", alt: "pokemon launch ad bedroom delivery still", wide: true },
+      { src: "assets/projects/pokemon/still-02.png", alt: "pokemon launch ad box arrival still" },
+      { src: "assets/projects/pokemon/still-03.png", alt: "pokemon launch ad laptop close-up still" },
+      { src: "assets/projects/pokemon/still-04.png", alt: "pokemon launch ad group unboxing still", wide: true }
     ]
   },
   "through-my-eyes": {
@@ -80,11 +78,11 @@ window.PROJECTS = {
     pageTitle: "2025 through my eyes | mateo tannahill",
     title: "2025 through my eyes",
     category: "personal recap",
-    videoSrc: "assets/videos/website-web.mp4",
+    videoSrc: "assets/videos/through-my-eyes-web.mp4",
     videoType: "video/mp4",
-    description: [
+    copy: [
       "personal recap film looking back on 2025 through small moments, travel, people, and the details that kept sticking with me over the year.",
-      "this page format works especially well for recap pieces because the video opens first and the image gallery can hold the quieter still moments underneath."
+      "this layout suits recap work especially well because the video can open first and the stills can hold the quieter moments underneath."
     ],
     gallery: [
       { src: "assets/life/golden-gate.jpg", alt: "2025 through my eyes still placeholder 1", wide: true },
@@ -101,9 +99,9 @@ window.PROJECTS = {
     category: "cinematic recap",
     videoSrc: "assets/videos/niagara-glen-recap.mp4",
     videoType: "video/mp4",
-    description: [
+    copy: [
       "cinematic recap from niagara glen with wloocc, cut to feel immersive, natural, and a little more atmospheric than a standard event recap.",
-      "the page below gives the video a stronger opening beat and leaves space for stills and BTS frames to tell the rest of the story."
+      "the page keeps the same project rhythm as the others, with the video leading and the stills carrying the rest of the tone underneath."
     ],
     gallery: [
       { src: "assets/life/coastal-road.jpg", alt: "niagara glen still placeholder 1", wide: true },

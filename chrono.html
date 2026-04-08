@@ -37,20 +37,49 @@
   <main class="project-main">
     <section class="project-hero">
       <div class="project-hero-video intro-reveal">
-        <video id="projectVideo" controls autoplay muted playsinline preload="metadata">
+        <video id="projectVideo" autoplay muted playsinline preload="metadata">
           <source id="projectVideoSource" src="" type="video/mp4" />
         </video>
+        <div class="project-video-controls" id="projectVideoControls" aria-label="video controls">
+          <div class="project-video-controls-top">
+            <button class="project-video-button" id="projectPlayToggle" type="button" aria-label="pause video">
+              <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+              <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="project-video-time" id="projectVideoTime">00:00 / 00:00</div>
+            <div class="project-video-actions">
+              <button class="project-video-button" id="projectMuteToggle" type="button" aria-label="unmute video">
+                <img class="icon-volume-on" src="assets/ui/video-controls/volume-full.svg" alt="" aria-hidden="true" />
+                <img class="icon-volume-off" src="assets/ui/video-controls/volume-mute.svg" alt="" aria-hidden="true" />
+              </button>
+              <button class="project-video-button" id="projectFullscreenToggle" type="button" aria-label="enter fullscreen">
+                <img src="assets/ui/video-controls/fullscreen.svg" alt="" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+          <input class="project-video-progress" id="projectVideoProgress" type="range" min="0" max="1000" value="0" step="1" aria-label="video progress" />
+        </div>
       </div>
     </section>
 
     <section class="project-body">
-      <div class="project-copy reveal-up">
-        <p class="eyebrow" id="projectCategory">project</p>
-        <h1 id="projectTitle">project title</h1>
+      <section class="project-meta reveal-up">
+        <div class="project-heading">
+          <p class="eyebrow" id="projectCategory">project</p>
+          <h1 id="projectTitle">project title</h1>
+        </div>
         <div class="project-description" id="projectDescription"></div>
-      </div>
+        <div class="project-credits" id="projectCredits" aria-label="project credits"></div>
+      </section>
 
-      <div class="project-gallery" id="projectGallery" aria-label="project stills and behind the scenes gallery"></div>
+      <section class="project-gallery-section reveal-up" aria-labelledby="projectGalleryTitle">
+        <div class="project-gallery-header">
+          <p class="eyebrow">frame stills</p>
+          <h2 id="projectGalleryTitle" hidden>selected frames</h2>
+          <p class="project-gallery-intro" id="projectGalleryIntro" hidden></p>
+        </div>
+        <div class="project-gallery" id="projectGallery" aria-label="project stills and behind the scenes gallery"></div>
+      </section>
     </section>
   </main>
 

@@ -44,13 +44,23 @@
     </section>
 
     <section class="project-body">
-      <div class="project-copy reveal-up">
-        <p class="eyebrow" id="projectCategory">project</p>
-        <h1 id="projectTitle">project title</h1>
+      <section class="project-meta reveal-up">
+        <div class="project-heading">
+          <p class="eyebrow" id="projectCategory">project</p>
+          <h1 id="projectTitle">project title</h1>
+        </div>
         <div class="project-description" id="projectDescription"></div>
-      </div>
+        <div class="project-credits" id="projectCredits" aria-label="project credits"></div>
+      </section>
 
-      <div class="project-gallery" id="projectGallery" aria-label="project stills and behind the scenes gallery"></div>
+      <section class="project-gallery-section reveal-up" aria-labelledby="projectGalleryTitle">
+        <div class="project-gallery-header">
+          <p class="eyebrow">frame stills</p>
+          <h2 id="projectGalleryTitle" hidden>selected frames</h2>
+          <p class="project-gallery-intro" id="projectGalleryIntro" hidden></p>
+        </div>
+        <div class="project-gallery" id="projectGallery" aria-label="project stills and behind the scenes gallery"></div>
+      </section>
     </section>
   </main>
 

@@ -19,6 +19,13 @@ const collageBoard = document.getElementById("collageBoard");
 const collagePromotedLayer = document.getElementById("collagePromotedLayer");
 const lifeStatement = document.getElementById("lifeStatement");
 const clickableSelector = "a, button, .project-visual, .hero-zone, .collage-card";
+const storedHomeTransitionMode = (() => {
+  try {
+    return window.sessionStorage.getItem("home-transition-mode");
+  } catch (_) {
+    return null;
+  }
+})();
 
 let mouseX = window.innerWidth * 0.5;
 let mouseY = window.innerHeight * 0.5;
@@ -34,6 +41,25 @@ let heroReelRAF = null;
 let clickAudioContext = null;
 let lifeLayoutInitialized = false;
 let lifeLayoutResizeTimer = null;
+
+function clearHomeTransitionMode() {
+  try {
+    window.sessionStorage.removeItem("home-transition-mode");
+  } catch (_) {}
+}
+
+function revealHomepageIntro(withDelay = true) {
+  const reveal = () => {
+    introRevealItems.forEach((item, index) => {
+      window.setTimeout(() => {
+        item.classList.add("is-visible");
+      }, withDelay ? index * 90 : 0);
+    });
+    document.body.classList.add("hero-animated");
+  };
+
+  reveal();
+}
 
 function setFishHoverState(isHoveringClickable) {
   document.body.classList.toggle("is-hovering-clickable", isHoveringClickable);
@@ -94,7 +120,14 @@ function playClickSound() {
 
 setFishHoverState(false);
 const loadingNameText = "[ mateo tannahill ]";
-if (loadingName) {
+if (storedHomeTransitionMode === "section-fade" && loadingScreen) {
+  loadingScreen.hidden = true;
+  loadingScreen.classList.add("is-hidden");
+  revealHomepageIntro(false);
+  window.setTimeout(() => {
+    clearHomeTransitionMode();
+  }, 0);
+} else if (loadingName) {
   loadingName.textContent = loadingNameText;
 
   window.setTimeout(() => {
@@ -109,15 +142,11 @@ if (loadingName) {
           loadingScreen.classList.add("is-lifting");
         }, 140);
         window.setTimeout(() => {
-          introRevealItems.forEach((item, index) => {
-            window.setTimeout(() => {
-              item.classList.add("is-visible");
-            }, index * 90);
-          });
-          document.body.classList.add("hero-animated");
+          revealHomepageIntro(true);
         }, 240);
         window.setTimeout(() => {
           loadingScreen.classList.add("is-hidden");
+          clearHomeTransitionMode();
         }, 900);
       }
     }, 58);
