@@ -5,10 +5,64 @@ const projectPageClickableSelector = "a, button, .project-gallery-card";
 const projectKey = document.body.dataset.project;
 const projectData = window.PROJECTS?.[projectKey];
 const projectPageBrandLink = document.querySelector(".brand");
+const projectPageCursorParent = projectPageCursor?.parentElement || null;
 
 let projectPageMouseX = window.innerWidth * 0.5;
 let projectPageMouseY = window.innerHeight * 0.5;
 let projectLastScrollY = window.scrollY;
+let projectClickAudioContext = null;
+
+function playProjectClickSound() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) {
+    return;
+  }
+
+  if (!projectClickAudioContext) {
+    projectClickAudioContext = new AudioCtx();
+  }
+
+  if (projectClickAudioContext.state === "suspended") {
+    projectClickAudioContext.resume().catch(() => {});
+  }
+
+  const now = projectClickAudioContext.currentTime;
+  const masterGain = projectClickAudioContext.createGain();
+  masterGain.gain.setValueAtTime(0.0001, now);
+  masterGain.gain.exponentialRampToValueAtTime(0.024, now + 0.001);
+  masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+  masterGain.connect(projectClickAudioContext.destination);
+
+  const bodyOscillator = projectClickAudioContext.createOscillator();
+  bodyOscillator.type = "triangle";
+  bodyOscillator.frequency.setValueAtTime(760, now);
+  bodyOscillator.frequency.exponentialRampToValueAtTime(490, now + 0.032);
+
+  const bodyFilter = projectClickAudioContext.createBiquadFilter();
+  bodyFilter.type = "lowpass";
+  bodyFilter.frequency.setValueAtTime(1320, now);
+  bodyFilter.Q.value = 0.55;
+
+  const transientOscillator = projectClickAudioContext.createOscillator();
+  transientOscillator.type = "sine";
+  transientOscillator.frequency.setValueAtTime(1280, now);
+  transientOscillator.frequency.exponentialRampToValueAtTime(880, now + 0.014);
+
+  const transientGain = projectClickAudioContext.createGain();
+  transientGain.gain.setValueAtTime(0.0001, now);
+  transientGain.gain.exponentialRampToValueAtTime(0.006, now + 0.001);
+  transientGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.014);
+
+  bodyOscillator.connect(bodyFilter);
+  bodyFilter.connect(masterGain);
+  transientOscillator.connect(transientGain);
+  transientGain.connect(masterGain);
+
+  bodyOscillator.start(now);
+  transientOscillator.start(now);
+  bodyOscillator.stop(now + 0.05);
+  transientOscillator.stop(now + 0.02);
+}
 
 function setProjectCursorHoverState(isHoveringClickable) {
   document.body.classList.toggle("is-hovering-clickable", isHoveringClickable);
@@ -31,6 +85,23 @@ function updateProjectHeaderVisibility() {
   projectLastScrollY = currentScrollY;
 }
 
+function syncProjectCursorContainer() {
+  if (!projectPageCursor) {
+    return;
+  }
+
+  const fullscreenElement = document.fullscreenElement;
+
+  if (fullscreenElement && !fullscreenElement.contains(projectPageCursor)) {
+    fullscreenElement.appendChild(projectPageCursor);
+  } else if (!fullscreenElement && projectPageCursorParent && projectPageCursor.parentElement !== projectPageCursorParent) {
+    projectPageCursorParent.appendChild(projectPageCursor);
+  }
+
+  projectPageCursor.style.left = `${projectPageMouseX}px`;
+  projectPageCursor.style.top = `${projectPageMouseY}px`;
+}
+
 function hydrateProjectPage(project) {
   if (!project) {
     return;
@@ -48,6 +119,7 @@ function hydrateProjectPage(project) {
   const gallery = document.getElementById("projectGallery");
   const galleryIntro = document.getElementById("projectGalleryIntro");
   const galleryTitle = document.getElementById("projectGalleryTitle");
+  const gallerySection = gallery?.closest(".project-gallery-section") || null;
   const controls = document.getElementById("projectVideoControls");
   const playToggle = document.getElementById("projectPlayToggle");
   const muteToggle = document.getElementById("projectMuteToggle");
@@ -70,6 +142,7 @@ function hydrateProjectPage(project) {
   }
 
   if (video) {
+    video.volume = 0.5;
     video.muted = true;
     video.autoplay = true;
     video.playsInline = true;
@@ -143,50 +216,44 @@ function hydrateProjectPage(project) {
       video.addEventListener("canplay", attemptPlayback, { once: true });
     }
 
-    if (controls && project.slug !== "chrono") {
-      controls.hidden = true;
+    if (playToggle) {
+      playToggle.addEventListener("click", () => {
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
     }
 
-    if (project.slug === "chrono") {
-      if (playToggle) {
-        playToggle.addEventListener("click", () => {
-          if (video.paused) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
+    if (muteToggle) {
+      muteToggle.addEventListener("click", () => {
+        video.muted = !video.muted;
+      });
+    }
+
+    if (progress) {
+      progress.addEventListener("input", () => {
+        if (!video.duration) {
+          return;
+        }
+
+        video.currentTime = (Number(progress.value) / 1000) * video.duration;
+      });
+    }
+
+    if (fullscreenToggle) {
+      fullscreenToggle.addEventListener("click", async () => {
+        const frame = video.closest(".project-hero-video");
+
+        try {
+          if (document.fullscreenElement) {
+            await document.exitFullscreen();
+          } else if (frame?.requestFullscreen) {
+            await frame.requestFullscreen();
           }
-        });
-      }
-
-      if (muteToggle) {
-        muteToggle.addEventListener("click", () => {
-          video.muted = !video.muted;
-        });
-      }
-
-      if (progress) {
-        progress.addEventListener("input", () => {
-          if (!video.duration) {
-            return;
-          }
-
-          video.currentTime = (Number(progress.value) / 1000) * video.duration;
-        });
-      }
-
-      if (fullscreenToggle) {
-        fullscreenToggle.addEventListener("click", async () => {
-          const frame = video.closest(".project-hero-video");
-
-          try {
-            if (document.fullscreenElement) {
-              await document.exitFullscreen();
-            } else if (frame?.requestFullscreen) {
-              await frame.requestFullscreen();
-            }
-          } catch (_) {}
-        });
-      }
+        } catch (_) {}
+      });
     }
   }
 
@@ -249,7 +316,9 @@ function hydrateProjectPage(project) {
   }
 
   if (gallery) {
-    gallery.innerHTML = project.gallery
+    const galleryItems = project.gallery || [];
+
+    gallery.innerHTML = galleryItems
       .map(
         (image) => `
           <figure class="project-gallery-card reveal-up${image.wide ? " is-wide" : ""}">
@@ -258,6 +327,10 @@ function hydrateProjectPage(project) {
         `
       )
       .join("");
+
+    if (gallerySection) {
+      gallerySection.hidden = galleryItems.length === 0;
+    }
   }
 }
 
@@ -312,8 +385,10 @@ projectPageHeaderLinks.forEach((link) => {
 });
 
 window.addEventListener("scroll", updateProjectHeaderVisibility, { passive: true });
+document.addEventListener("fullscreenchange", syncProjectCursorContainer);
 updateProjectHeaderVisibility();
 setProjectCursorHoverState(false);
+syncProjectCursorContainer();
 
 document.addEventListener("mousemove", (event) => {
   projectPageMouseX = event.clientX;
@@ -328,8 +403,12 @@ document.addEventListener("mousemove", (event) => {
   setProjectCursorHoverState(hovered instanceof Element && Boolean(hovered.closest(projectPageClickableSelector)));
 });
 
-document.addEventListener("mousedown", () => {
+document.addEventListener("mousedown", (event) => {
   document.body.classList.add("is-clicking");
+
+  if (event.button === 0) {
+    playProjectClickSound();
+  }
 });
 
 document.addEventListener("mouseup", () => {

@@ -18,7 +18,7 @@
     <div class="loading-copy">
       <p>'20-'26</p>
       <p>yyz - ykf - sfo</p>
-      <p>film / travel / design</p>
+      <p>film / creative / director</p>
       <p>type portfolio</p>
       <p>year 2026</p>
       <p class="loading-name">[ mateo tannahill ]</p>
@@ -26,21 +26,6 @@
   </div>
 
   <div class="circle-cursor" id="fishCursor" aria-hidden="true"></div>
-
-  <button class="cat-companion is-sleeping" id="catCompanion" aria-label="wake the cat">
-    <span class="cat-sleeping">
-      <img src="assets/ui/cat-sleep.svg" alt="" />
-    </span>
-    <span class="cat-sitting">
-      <img src="assets/ui/cat-sit.svg" alt="" />
-    </span>
-    <span class="cat-walking cat-frame-a">
-      <img src="assets/ui/cat-walk-a.svg" alt="" />
-    </span>
-    <span class="cat-walking cat-frame-b">
-      <img src="assets/ui/cat-walk-b.svg" alt="" />
-    </span>
-  </button>
 
   <header class="site-header intro-reveal">
     <a class="brand" href="#top" aria-label="mateo tannahill">
@@ -54,7 +39,7 @@
     </nav>
 
     <div class="header-socials" aria-label="social links">
-      <a class="email-link" href="mailto:Mateotann2007@outlook.com">mateotann2007@outlook.com</a>
+      <a class="email-link" href="mailto:mateotannahill@gmail.com">mateotannahill@gmail.com</a>
       <a class="social-link" href="https://www.youtube.com/@mateotannn/search" target="_blank" rel="noreferrer" aria-label="youtube">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.98 2.98 0 0 0-2.09-2.1C17.63 4.6 12 4.6 12 4.6s-5.63 0-7.49.49a2.98 2.98 0 0 0-2.09 2.1A31.2 31.2 0 0 0 2 12a31.2 31.2 0 0 0 .42 4.81 2.98 2.98 0 0 0 2.09 2.1c1.86.49 7.49.49 7.49.49s5.63 0 7.49-.49a2.98 2.98 0 0 0 2.09-2.1A31.2 31.2 0 0 0 22 12a31.2 31.2 0 0 0-.42-4.81M10 15.5v-7l6 3.5z"/></svg>
       </a>
@@ -91,7 +76,9 @@
         </div>
 
         <div class="hero-reel-ui intro-reveal" aria-hidden="true">
-          <div class="hero-filmstrip" id="heroFilmstrip"></div>
+          <div class="hero-filmstrip hero-filmstrip--static" id="heroFilmstrip" data-static-filmstrip="true">
+            <img src="assets/ui/hero-reel-bar.svg" alt="" />
+          </div>
           <div class="hero-reel-track">
             <span class="hero-reel-progress" id="heroReelProgress"></span>
             <span class="hero-reel-marker" id="heroReelMarker"></span>
@@ -103,7 +90,7 @@
     <section class="gallery" id="gallery">
       <div class="section-heading reveal-up">
         <p class="eyebrow">gallery</p>
-        <h2>my work</h2>
+        <h2>recent work</h2>
       </div>
 
       <div class="project-grid">
@@ -180,40 +167,43 @@
         </div>
 
         <div class="collage-board" id="collageBoard" aria-label="draggable life collage">
-          <article class="collage-card collage-photo" data-layer="back" data-zone="left" data-x="256" data-y="30" style="--w: 332px; --h: 248px; --r: 3deg;">
+          <article class="collage-card collage-photo" data-layer="back" data-zone="left" data-fixed="true" data-x="470" data-y="46" style="--w: 332px; --h: 248px; --r: 3deg;">
             <img src="assets/life/sf-street.jpg" alt="san francisco street" />
           </article>
-          <article class="collage-card collage-photo" data-layer="back" data-zone="right" data-x="978" data-y="30" style="--w: 308px; --h: 214px; --r: -4deg;">
+          <article class="collage-card collage-photo" data-layer="back" data-zone="right" data-fixed="true" data-x="1188" data-y="42" style="--w: 308px; --h: 214px; --r: -4deg;">
             <img src="assets/life/IMG_3598.jpg" alt="beach at dusk" />
           </article>
-          <article class="collage-card collage-object" data-layer="front" data-zone="top" data-x="632" data-y="54" style="--w: 188px; --h: 218px; --r: -7deg;">
+          <article class="collage-card collage-object" data-layer="front" data-zone="top" data-fixed="true" data-x="858" data-y="78" style="--w: 188px; --h: 218px; --r: -7deg;">
             <img src="assets/life/selvedge-denim.png" alt="selvedge denim" />
           </article>
-          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-x="822" data-y="204" style="--w: 188px; --h: 196px; --r: 6deg;">
+          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-fixed="true" data-x="1048" data-y="246" style="--w: 188px; --h: 196px; --r: 6deg;">
             <img src="assets/life/camera-cutout.png" alt="sony camera cutout" />
           </article>
-          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-x="1116" data-y="266" style="--w: 124px; --h: 124px; --r: 4deg;">
+          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-fixed="true" data-x="1320" data-y="302" style="--w: 124px; --h: 124px; --r: 4deg;">
             <img src="assets/life/matcha.png" alt="matcha" />
           </article>
-          <article class="collage-card collage-photo collage-photo-strip is-tall" data-layer="back" data-zone="left" data-x="78" data-y="422" style="--w: 92px; --h: 316px; --r: -4deg;">
+          <article class="collage-card collage-photo collage-photo-strip is-tall" data-layer="back" data-zone="left" data-fixed="true" data-x="96" data-y="404" style="--w: 92px; --h: 316px; --r: -4deg;">
             <img src="assets/life/photo-strip-single-cutout.png" alt="single photo strip" />
           </article>
-          <article class="collage-card collage-object" data-layer="back" data-zone="center" data-x="500" data-y="332" style="--w: 178px; --h: 178px; --r: 7deg;">
+          <article class="collage-card collage-object" data-layer="back" data-zone="center" data-fixed="true" data-x="760" data-y="394" style="--w: 178px; --h: 178px; --r: 7deg;">
             <img src="assets/life/arcteryx-bag.png" alt="arcteryx bag" />
           </article>
-          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-x="850" data-y="402" style="--w: 156px; --h: 180px; --r: 7deg;">
+          <article class="collage-card collage-photo" data-layer="back" data-zone="center" data-fixed="true" data-x="856" data-y="644" style="--w: 286px; --h: 161px; --r: -5deg;">
+            <img src="assets/life/cafe-still.jpg" alt="cafe window still" />
+          </article>
+          <article class="collage-card collage-object" data-layer="front" data-zone="right" data-fixed="true" data-x="1076" data-y="474" style="--w: 156px; --h: 180px; --r: 7deg;">
             <img src="assets/life/hirono.png" alt="green hirono figure" />
           </article>
-          <article class="collage-card collage-photo collage-photo-strip is-tall" data-layer="back" data-zone="left" data-x="260" data-y="514" style="--w: 246px; --h: 312px; --r: 5deg;">
+          <article class="collage-card collage-photo collage-photo-strip is-tall" data-layer="back" data-zone="left" data-fixed="true" data-x="462" data-y="752" style="--w: 246px; --h: 312px; --r: 5deg;">
             <img src="assets/life/photo-strips-group-cutout.png" alt="group photo strips" />
           </article>
-          <article class="collage-card collage-photo collage-photo-cropped" data-layer="back" data-zone="right" data-x="1050" data-y="506" style="--w: 176px; --h: 176px; --r: -2deg;">
+          <article class="collage-card collage-photo collage-photo-cropped" data-layer="back" data-zone="center" data-fixed="true" data-x="1510" data-y="612" style="--w: 176px; --h: 176px; --r: -2deg;">
             <img src="assets/life/blonde-cover.jpeg" alt="frank ocean blonde album cover" />
           </article>
-          <article class="collage-card collage-photo" data-layer="front" data-zone="right" data-x="1244" data-y="470" style="--w: 170px; --h: 258px; --r: 4deg;">
+          <article class="collage-card collage-photo" data-layer="front" data-zone="right" data-fixed="true" data-x="1262" data-y="522" style="--w: 170px; --h: 258px; --r: 4deg;">
             <img src="assets/life/past-lives-poster.jpg" alt="past lives movie poster" />
           </article>
-          <article class="collage-card collage-photo" data-layer="back" data-zone="bottom" data-x="558" data-y="786" style="--w: 392px; --h: 252px; --r: 3deg;">
+          <article class="collage-card collage-photo" data-layer="back" data-zone="center" data-fixed="true" data-x="382" data-y="562" style="--w: 392px; --h: 252px; --r: 3deg;">
             <img src="assets/life/coastal-road.jpg" alt="coastal road at sunset" />
           </article>
         </div>

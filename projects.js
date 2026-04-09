@@ -6,11 +6,12 @@ window.PROJECTS = {
     category: "figbuild 2026 designathon product launch",
     videoSrc: "assets/videos/chrono-web.mp4",
     videoType: "video/mp4",
-    copy: [
-      "chrono was our second-place winner at this year's figbuild designathon. i storyboarded, shot, and edited the launch film in under 24 hours while the product itself went from idea to submission in less than three days.",
-      "i wanted it to feel more cinematic than a normal hackathon demo, so the piece leans on tighter framing, low-light texture, and a slower build into the product story.",
-      "<a href=\"https://devpost.com/software/chrono-pyad5j\" target=\"_blank\" rel=\"noreferrer\">see the full devpost project</a>"
-    ],
+      copy: [
+        "chrono was our second-place winner at this year's figbuild designathon. i storyboarded, shot, and edited the launch film in under 24 hours while the product itself went from idea to submission in less than three days.",
+        "i wanted it to feel more cinematic than a normal hackathon demo, so the piece leans on tighter framing, low-light texture, and a slower build into the product story.",
+        "<a href=\"https://x.com/mateotannn/status/2034312299549204988\" target=\"_blank\" rel=\"noreferrer\">view bts of us working on the project before the big win</a>",
+        "<a href=\"https://devpost.com/software/chrono-pyad5j\" target=\"_blank\" rel=\"noreferrer\">see the full devpost project</a>"
+      ],
     galleryIntro: "",
     gallery: [
       { src: "assets/projects/chrono/still-01.jpg", alt: "close-up frame from chrono", wide: true },
@@ -77,19 +78,18 @@ window.PROJECTS = {
     slug: "through-my-eyes",
     pageTitle: "2025 through my eyes | mateo tannahill",
     title: "2025 through my eyes",
-    category: "personal recap",
-    videoSrc: "assets/videos/through-my-eyes-web.mp4",
-    videoType: "video/mp4",
-    copy: [
-      "personal recap film looking back on 2025 through small moments, travel, people, and the details that kept sticking with me over the year.",
-      "this layout suits recap work especially well because the video can open first and the stills can hold the quieter moments underneath."
-    ],
+      category: "personal recap",
+      videoSrc: "assets/videos/through-my-eyes-web.mp4",
+      videoType: "video/mp4",
+      copy: [
+        "personal recap film looking back on 2025 through small moments, travel, people, and the details that kept sticking with me over the year.",
+        "put together showing what shaped me through the past year and shaped much of my creative work.",
+        "<a href=\"https://www.youtube.com/watch?v=vMZcc80qg7U\" target=\"_blank\" rel=\"noreferrer\">website hosting crushes video quality! find this recap at full hd here.</a>"
+      ],
     gallery: [
-      { src: "assets/life/golden-gate.jpg", alt: "2025 through my eyes still placeholder 1", wide: true },
-      { src: "assets/life/IMG_3598.jpg", alt: "2025 through my eyes still placeholder 2" },
-      { src: "assets/life/sf-street.jpg", alt: "2025 through my eyes behind the scenes placeholder 1" },
-      { src: "assets/life/ocean-dusk.jpg", alt: "2025 through my eyes still placeholder 3" },
-      { src: "assets/life/coastal-road.jpg", alt: "2025 through my eyes behind the scenes placeholder 2", wide: true }
+      { src: "assets/projects/through-my-eyes/still-01.png", alt: "2025 through my eyes still in the forest", wide: true },
+      { src: "assets/projects/through-my-eyes/still-02.png", alt: "2025 through my eyes cafe still" },
+      { src: "assets/projects/through-my-eyes/still-03.png", alt: "2025 through my eyes carnival swing ride still", wide: true }
     ]
   },
   "niagara-glen": {
@@ -100,15 +100,10 @@ window.PROJECTS = {
     videoSrc: "assets/videos/niagara-glen-recap.mp4",
     videoType: "video/mp4",
     copy: [
-      "cinematic recap from niagara glen with wloocc, cut to feel immersive, natural, and a little more atmospheric than a standard event recap.",
-      "the page keeps the same project rhythm as the others, with the video leading and the stills carrying the rest of the tone underneath."
+      "combining my hobby of bouldering and putting my videography skills to the test, i was asked to shoot and direct a recap of the waterloo climbing club's trip to the niagara glen.",
+      "i now lead the marketing team for the club and have managed and created most of the videos on the <a href=\"https://www.instagram.com/p/DQZiaenkYIy/\" target=\"_blank\" rel=\"noreferrer\">waterloo climbing club instagram page</a>, so this recap also reflects the larger creative direction i've helped shape for the team.",
+      "i worked under new conditions with natural lighting rather than a fixed set, and with a big group of individuals rather than actors. it was a great experience working with a larger group and taking a more creative approach to show the day trip in a fast-paced, engaging way while adapting to more unpredictable conditions."
     ],
-    gallery: [
-      { src: "assets/life/coastal-road.jpg", alt: "niagara glen still placeholder 1", wide: true },
-      { src: "assets/life/ocean-dusk.jpg", alt: "niagara glen still placeholder 2" },
-      { src: "assets/life/golden-gate.jpg", alt: "niagara glen behind the scenes placeholder 1" },
-      { src: "assets/life/IMG_3598.jpg", alt: "niagara glen behind the scenes placeholder 2" },
-      { src: "assets/life/sf-street.jpg", alt: "niagara glen still placeholder 3" }
-    ]
+    gallery: []
   }
 };

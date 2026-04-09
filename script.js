@@ -6,8 +6,6 @@ const heroFilmstrip = document.getElementById("heroFilmstrip");
 const heroReelProgress = document.getElementById("heroReelProgress");
 const heroReelMarker = document.getElementById("heroReelMarker");
 const fishCursor = document.getElementById("fishCursor");
-const catCompanion = document.getElementById("catCompanion");
-const catWalkingFrames = catCompanion ? Array.from(catCompanion.querySelectorAll(".cat-walking")) : [];
 const loadingScreen = document.getElementById("loadingScreen");
 const loadingName = loadingScreen ? loadingScreen.querySelector(".loading-name") : null;
 const introRevealItems = Array.from(document.querySelectorAll(".intro-reveal"));
@@ -29,13 +27,6 @@ const storedHomeTransitionMode = (() => {
 
 let mouseX = window.innerWidth * 0.5;
 let mouseY = window.innerHeight * 0.5;
-let catX = window.innerWidth - 180;
-let catY = window.innerHeight - 140;
-let catState = "sleeping";
-let catFrameElapsed = 0;
-let lastCatTime = 0;
-let parkedDocX = 0;
-let parkedDocY = 0;
 let lastScrollY = window.scrollY;
 let heroReelRAF = null;
 let clickAudioContext = null;
@@ -299,6 +290,10 @@ async function buildHeroFilmstrip() {
     return;
   }
 
+  if (heroFilmstrip.dataset.staticFilmstrip === "true") {
+    return;
+  }
+
   const sourceUrl = heroReelVideo.currentSrc || heroReelVideo.querySelector("source")?.src;
   if (!sourceUrl) {
     return;
@@ -378,126 +373,6 @@ if (heroReelVideo) {
   if (!heroReelVideo.paused) {
     heroReelRAF = window.requestAnimationFrame(animateHeroReelProgress);
   }
-}
-
-if (catCompanion) {
-  catCompanion.addEventListener("click", () => {
-    if (catState === "sleeping") {
-      catState = "awake";
-      catCompanion.classList.add("is-awake");
-      catCompanion.classList.remove("is-sleeping", "is-parked");
-      catCompanion.style.position = "fixed";
-      catCompanion.style.right = "auto";
-      catCompanion.style.bottom = "auto";
-      return;
-    }
-
-    if (catState === "awake") {
-      catState = "parked";
-      parkedDocX = catX;
-      parkedDocY = window.scrollY + catY;
-      catCompanion.classList.remove("is-awake", "is-sleeping", "is-step-b");
-      catCompanion.classList.add("is-parked");
-      catCompanion.style.position = "absolute";
-      catCompanion.style.left = `${parkedDocX}px`;
-      catCompanion.style.top = `${parkedDocY}px`;
-      catCompanion.style.right = "auto";
-      catCompanion.style.bottom = "auto";
-      return;
-    }
-
-    if (catState === "parked") {
-      catState = "awake";
-      catX = parkedDocX;
-      catY = parkedDocY - window.scrollY;
-      catCompanion.classList.add("is-awake");
-      catCompanion.classList.remove("is-sleeping", "is-parked");
-      catCompanion.style.position = "fixed";
-      catCompanion.style.left = `${catX}px`;
-      catCompanion.style.top = `${catY}px`;
-      catCompanion.style.right = "auto";
-      catCompanion.style.bottom = "auto";
-      return;
-    }
-
-    if (catState !== "sleeping") {
-      catState = "sleeping";
-      catCompanion.classList.remove("is-step-b");
-      catCompanion.classList.remove("is-awake", "is-parked", "is-facing-left");
-      catCompanion.classList.add("is-sleeping");
-      catCompanion.style.position = "fixed";
-      catCompanion.style.left = "";
-      catCompanion.style.top = "";
-      catCompanion.style.right = "1.2rem";
-      catCompanion.style.bottom = "1rem";
-      catX = window.innerWidth - 180;
-      catY = window.innerHeight - 140;
-    }
-  });
-}
-
-function animateCat(now) {
-  const delta = lastCatTime ? now - lastCatTime : 16;
-  lastCatTime = now;
-
-  if (catState === "awake") {
-    const restRadius = 150;
-    const chaseStartRadius = 210;
-    const dxToFish = mouseX - catX;
-    const dyToFish = mouseY - catY;
-    const distanceToFish = Math.hypot(dxToFish, dyToFish) || 0.001;
-    const targetX = mouseX - (dxToFish / distanceToFish) * restRadius;
-    const targetY = mouseY - (dyToFish / distanceToFish) * restRadius;
-    const dx = targetX - catX;
-    const dy = targetY - catY;
-    const distance = Math.hypot(dx, dy);
-    const moveSpeed = 1.45;
-    const catFacingLeft = dx < -4;
-
-    catCompanion.classList.toggle("is-facing-left", catFacingLeft);
-    catWalkingFrames.forEach((frame) => {
-      frame.style.transform = catFacingLeft ? "scaleX(-1)" : "";
-    });
-
-    if (distanceToFish > chaseStartRadius && distance > 0.001) {
-      const step = Math.min(moveSpeed, distance);
-      catX += (dx / distance) * step;
-      catY += (dy / distance) * step;
-    }
-
-    catCompanion.style.position = "fixed";
-    catCompanion.style.left = `${catX}px`;
-    catCompanion.style.top = `${catY}px`;
-    catCompanion.style.right = "auto";
-    catCompanion.style.bottom = "auto";
-
-    if (distanceToFish > chaseStartRadius && distance > 12) {
-      catFrameElapsed += delta;
-
-      if (catFrameElapsed >= 280) {
-        catCompanion.classList.toggle("is-step-b");
-        catFrameElapsed = 0;
-      }
-    } else {
-      catFrameElapsed = 0;
-      catCompanion.classList.remove("is-step-b");
-    }
-  } else if (catState === "parked") {
-    catCompanion.style.position = "absolute";
-    catCompanion.style.left = `${parkedDocX}px`;
-    catCompanion.style.top = `${parkedDocY}px`;
-  } else {
-    catCompanion.classList.remove("is-step-b", "is-facing-left");
-    catWalkingFrames.forEach((frame) => {
-      frame.style.transform = "";
-    });
-  }
-
-  requestAnimationFrame(animateCat);
-}
-
-if (catCompanion) {
-  requestAnimationFrame(animateCat);
 }
 
 let collageZ = 1;
@@ -600,8 +475,20 @@ function randomizeLifeLayout() {
     bottom: textRectRaw.bottom - sceneRect.top,
   };
 
-  const cards = shuffleCards(collageCards);
-  const layoutPadding = window.innerWidth <= 760 ? 14 : 26;
+  const fixedCards = [];
+  const floatingCards = [];
+
+  collageCards.forEach((card) => {
+    const isFixed = card.dataset.fixed === "true" && window.innerWidth > 760;
+    if (isFixed) {
+      fixedCards.push(card);
+    } else {
+      floatingCards.push(card);
+    }
+  });
+
+  const cards = [...fixedCards, ...shuffleCards(floatingCards)];
+  const layoutPadding = window.innerWidth <= 760 ? 20 : 40;
   let layout = null;
 
   cards.forEach((card) => {
@@ -625,7 +512,31 @@ function randomizeLifeLayout() {
       const bounds = getPlacementBounds(zone, width, height, boardWidth, boardHeight, textRect);
       let candidateRect = null;
 
-      for (let attempt = 0; attempt < 160; attempt += 1) {
+      if (card.dataset.fixed === "true" && window.innerWidth > 760) {
+        const x = Number(card.dataset.x || 0);
+        const y = Number(card.dataset.y || 0);
+        const rect = {
+          left: x,
+          top: y,
+          right: x + width,
+          bottom: y + height,
+        };
+        const bufferedRect = inflateRect(rect, layoutPadding);
+        const intersectsOther = placedRects.some((placedRect) => rectsOverlap(bufferedRect, placedRect, 12));
+        const intersectsText = rectsOverlap(bufferedRect, textRect, window.innerWidth <= 760 ? 10 : 20);
+        const withinBounds =
+          rect.left >= bounds.minX &&
+          rect.top >= bounds.minY &&
+          rect.right <= bounds.maxX + width &&
+          rect.bottom <= bounds.maxY + height;
+
+        if (!intersectsOther && !intersectsText && withinBounds) {
+          candidateRect = rect;
+          placedRects.push(bufferedRect);
+        }
+      }
+
+      for (let attempt = 0; attempt < 160 && !candidateRect; attempt += 1) {
         const x = randomBetween(bounds.minX, Math.max(bounds.minX, bounds.maxX));
         const y = randomBetween(bounds.minY, Math.max(bounds.minY, bounds.maxY));
         const rect = {
@@ -635,8 +546,8 @@ function randomizeLifeLayout() {
           bottom: y + height,
         };
         const bufferedRect = inflateRect(rect, layoutPadding);
-        const intersectsOther = placedRects.some((placedRect) => rectsOverlap(bufferedRect, placedRect, 0));
-        const intersectsText = layer !== "back" && rectsOverlap(bufferedRect, textRect, window.innerWidth <= 760 ? 10 : 20);
+        const intersectsOther = placedRects.some((placedRect) => rectsOverlap(bufferedRect, placedRect, 12));
+        const intersectsText = rectsOverlap(bufferedRect, textRect, window.innerWidth <= 760 ? 10 : 20);
 
         if (!intersectsOther && !intersectsText) {
           candidateRect = rect;
@@ -673,7 +584,8 @@ function randomizeLifeLayout() {
       collageBoard.appendChild(card);
     }
 
-    const rotationOffset = randomBetween(-6, 6);
+    const isFixed = card.dataset.fixed === "true" && window.innerWidth > 760;
+    const rotationOffset = isFixed ? 0 : randomBetween(-6, 6);
     const baseZ = layer === "front" ? 70 + index : 10 + index;
 
     card.dataset.x = `${candidateRect.left}`;
