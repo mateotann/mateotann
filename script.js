@@ -1,11 +1,11 @@
 const projectCards = Array.from(document.querySelectorAll(".project-card"));
+const projectPreviewLinks = Array.from(document.querySelectorAll(".project-video"));
 const collageCards = Array.from(document.querySelectorAll(".collage-card"));
 const revealItems = Array.from(document.querySelectorAll(".reveal-up"));
 const heroReelVideo = document.getElementById("heroReelVideo");
 const heroFilmstrip = document.getElementById("heroFilmstrip");
 const heroReelProgress = document.getElementById("heroReelProgress");
 const heroReelMarker = document.getElementById("heroReelMarker");
-const fishCursor = document.getElementById("fishCursor");
 const loadingScreen = document.getElementById("loadingScreen");
 const loadingName = loadingScreen ? loadingScreen.querySelector(".loading-name") : null;
 const introRevealItems = Array.from(document.querySelectorAll(".intro-reveal"));
@@ -16,7 +16,8 @@ const lifeScene = document.getElementById("lifeScene");
 const collageBoard = document.getElementById("collageBoard");
 const collagePromotedLayer = document.getElementById("collagePromotedLayer");
 const lifeStatement = document.getElementById("lifeStatement");
-const clickableSelector = "a, button, .project-visual, .hero-zone, .collage-card";
+const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const compactLifeLayoutQuery = window.matchMedia("(max-width: 480px)");
 const storedHomeTransitionMode = (() => {
   try {
     return window.sessionStorage.getItem("home-transition-mode");
@@ -29,9 +30,16 @@ let mouseX = window.innerWidth * 0.5;
 let mouseY = window.innerHeight * 0.5;
 let lastScrollY = window.scrollY;
 let heroReelRAF = null;
-let clickAudioContext = null;
 let lifeLayoutInitialized = false;
 let lifeLayoutResizeTimer = null;
+let clickAudioContext = null;
+const headerRevealTopThreshold = 18;
+const headerHideScrollThreshold = 72;
+const headerScrollDelta = 10;
+
+function isCompactLifeLayout() {
+  return compactLifeLayoutQuery.matches;
+}
 
 function clearHomeTransitionMode() {
   try {
@@ -52,12 +60,7 @@ function revealHomepageIntro(withDelay = true) {
   reveal();
 }
 
-function setFishHoverState(isHoveringClickable) {
-  document.body.classList.toggle("is-hovering-clickable", isHoveringClickable);
-  fishCursor.classList.toggle("is-hovering-clickable", isHoveringClickable);
-}
-
-function playClickSound() {
+function playSoftClickSound() {
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   if (!AudioCtx) {
     return;
@@ -72,44 +75,49 @@ function playClickSound() {
   }
 
   const now = clickAudioContext.currentTime;
-  const masterGain = clickAudioContext.createGain();
-  masterGain.gain.setValueAtTime(0.0001, now);
-  masterGain.gain.exponentialRampToValueAtTime(0.024, now + 0.001);
-  masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
-  masterGain.connect(clickAudioContext.destination);
+  const output = clickAudioContext.createGain();
+  output.gain.setValueAtTime(0.0001, now);
+  output.gain.exponentialRampToValueAtTime(0.038, now + 0.004);
+  output.gain.exponentialRampToValueAtTime(0.0001, now + 0.085);
+  output.connect(clickAudioContext.destination);
 
   const bodyOscillator = clickAudioContext.createOscillator();
   bodyOscillator.type = "triangle";
-  bodyOscillator.frequency.setValueAtTime(760, now);
-  bodyOscillator.frequency.exponentialRampToValueAtTime(490, now + 0.032);
+  bodyOscillator.frequency.setValueAtTime(240, now);
+  bodyOscillator.frequency.exponentialRampToValueAtTime(162, now + 0.05);
 
   const bodyFilter = clickAudioContext.createBiquadFilter();
   bodyFilter.type = "lowpass";
-  bodyFilter.frequency.setValueAtTime(1320, now);
-  bodyFilter.Q.value = 0.55;
+  bodyFilter.frequency.setValueAtTime(980, now);
+  bodyFilter.Q.value = 0.7;
 
-  const transientOscillator = clickAudioContext.createOscillator();
-  transientOscillator.type = "sine";
-  transientOscillator.frequency.setValueAtTime(1280, now);
-  transientOscillator.frequency.exponentialRampToValueAtTime(880, now + 0.014);
+  const bodyGain = clickAudioContext.createGain();
+  bodyGain.gain.setValueAtTime(0.0001, now);
+  bodyGain.gain.exponentialRampToValueAtTime(1.35, now + 0.003);
+  bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
 
-  const transientGain = clickAudioContext.createGain();
-  transientGain.gain.setValueAtTime(0.0001, now);
-  transientGain.gain.exponentialRampToValueAtTime(0.006, now + 0.001);
-  transientGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.014);
+  const tapOscillator = clickAudioContext.createOscillator();
+  tapOscillator.type = "sine";
+  tapOscillator.frequency.setValueAtTime(1220, now);
+  tapOscillator.frequency.exponentialRampToValueAtTime(760, now + 0.018);
+
+  const tapGain = clickAudioContext.createGain();
+  tapGain.gain.setValueAtTime(0.0001, now);
+  tapGain.gain.exponentialRampToValueAtTime(0.24, now + 0.0015);
+  tapGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.02);
 
   bodyOscillator.connect(bodyFilter);
-  bodyFilter.connect(masterGain);
-  transientOscillator.connect(transientGain);
-  transientGain.connect(masterGain);
+  bodyFilter.connect(bodyGain);
+  bodyGain.connect(output);
+  tapOscillator.connect(tapGain);
+  tapGain.connect(output);
 
   bodyOscillator.start(now);
-  transientOscillator.start(now);
-  bodyOscillator.stop(now + 0.05);
-  transientOscillator.stop(now + 0.018);
+  tapOscillator.start(now);
+  bodyOscillator.stop(now + 0.075);
+  tapOscillator.stop(now + 0.022);
 }
 
-setFishHoverState(false);
 const loadingNameText = "[ mateo tannahill ]";
 if (storedHomeTransitionMode === "section-fade" && loadingScreen) {
   loadingScreen.hidden = true;
@@ -180,14 +188,16 @@ function updateActiveNav() {
 
 function updateHeaderVisibility() {
   const currentScrollY = window.scrollY;
-  const isScrollingDown = currentScrollY > lastScrollY + 8;
-  const isNearTop = currentScrollY < 24;
-  const shouldHide = isScrollingDown && !isNearTop;
-  const shouldShow = isNearTop;
+  const isNearTop = currentScrollY <= headerRevealTopThreshold;
+  const isScrollingDown = currentScrollY > lastScrollY + headerScrollDelta;
+  const isScrollingUp = currentScrollY < lastScrollY - headerScrollDelta;
+  const hasScrolledPastHidePoint = currentScrollY > headerHideScrollThreshold;
 
-  if (shouldHide) {
+  if (isNearTop) {
+    document.body.classList.remove("header-hidden");
+  } else if (isScrollingDown && hasScrolledPastHidePoint) {
     document.body.classList.add("header-hidden");
-  } else if (shouldShow) {
+  } else if (isScrollingUp) {
     document.body.classList.remove("header-hidden");
   }
 
@@ -216,8 +226,7 @@ const revealObserver = new IntersectionObserver(
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-      } else {
-        entry.target.classList.remove("is-visible");
+        revealObserver.unobserve(entry.target);
       }
     });
   },
@@ -229,29 +238,13 @@ const revealObserver = new IntersectionObserver(
 
 revealItems.forEach((item) => revealObserver.observe(item));
 
-document.addEventListener("mousemove", (event) => {
-  mouseX = event.clientX;
-  mouseY = event.clientY;
-  fishCursor.style.left = `${mouseX}px`;
-  fishCursor.style.top = `${mouseY}px`;
-
-  const hovered = document.elementFromPoint(mouseX, mouseY);
-  setFishHoverState(hovered instanceof Element && Boolean(hovered.closest(clickableSelector)));
-});
-
-document.addEventListener("mousedown", (event) => {
-  document.body.classList.add("is-clicking");
-
-  if (event.button === 0) {
-    playClickSound();
-  }
-});
-
-document.addEventListener("mouseup", () => {
-  window.setTimeout(() => {
-    document.body.classList.remove("is-clicking");
-  }, 120);
-});
+if (supportsHover) {
+  document.addEventListener("mousedown", (event) => {
+    if (event.button === 0) {
+      playSoftClickSound();
+    }
+  });
+}
 
 function updateHeroReelProgress() {
   if (!heroReelVideo || !heroReelMarker) {
@@ -375,6 +368,58 @@ if (heroReelVideo) {
   }
 }
 
+function playProjectPreview(link, video) {
+  if (!video) {
+    return;
+  }
+
+  link.classList.add("is-playing");
+  video.currentTime = 0;
+  const playPromise = video.play();
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(() => {
+      link.classList.remove("is-playing");
+    });
+  }
+}
+
+function stopProjectPreview(link, video) {
+  if (!video) {
+    return;
+  }
+
+  video.pause();
+  video.currentTime = 0;
+  link.classList.remove("is-playing");
+}
+
+projectPreviewLinks.forEach((link) => {
+  const video = link.querySelector("video");
+  if (!video) {
+    return;
+  }
+
+  stopProjectPreview(link, video);
+
+  if (supportsHover) {
+    link.addEventListener("mouseenter", () => {
+      playProjectPreview(link, video);
+    });
+
+    link.addEventListener("mouseleave", () => {
+      stopProjectPreview(link, video);
+    });
+  }
+
+  link.addEventListener("focusin", () => {
+    playProjectPreview(link, video);
+  });
+
+  link.addEventListener("focusout", () => {
+    stopProjectPreview(link, video);
+  });
+});
+
 let collageZ = 1;
 
 function randomBetween(min, max) {
@@ -459,6 +504,22 @@ function randomizeLifeLayout() {
     return;
   }
 
+  if (isCompactLifeLayout()) {
+    lifeScene.classList.add("life-scene--compact");
+    collageCards.forEach((card) => {
+      if (card.parentElement !== collageBoard) {
+        collageBoard.appendChild(card);
+      }
+
+      card.classList.remove("is-behind-text", "is-front-layer", "is-promoted", "is-dragging");
+      card.style.removeProperty("z-index");
+    });
+    lifeLayoutInitialized = true;
+    return;
+  }
+
+  lifeScene.classList.remove("life-scene--compact");
+
   const sceneRect = lifeScene.getBoundingClientRect();
   const textRectRaw = lifeStatement.getBoundingClientRect();
   const boardWidth = sceneRect.width;
@@ -479,7 +540,7 @@ function randomizeLifeLayout() {
   const floatingCards = [];
 
   collageCards.forEach((card) => {
-    const isFixed = card.dataset.fixed === "true" && window.innerWidth > 760;
+    const isFixed = card.dataset.fixed === "true" && window.innerWidth > 1280;
     if (isFixed) {
       fixedCards.push(card);
     } else {
@@ -512,7 +573,7 @@ function randomizeLifeLayout() {
       const bounds = getPlacementBounds(zone, width, height, boardWidth, boardHeight, textRect);
       let candidateRect = null;
 
-      if (card.dataset.fixed === "true" && window.innerWidth > 760) {
+      if (card.dataset.fixed === "true" && window.innerWidth > 1280) {
         const x = Number(card.dataset.x || 0);
         const y = Number(card.dataset.y || 0);
         const rect = {
@@ -584,7 +645,7 @@ function randomizeLifeLayout() {
       collageBoard.appendChild(card);
     }
 
-    const isFixed = card.dataset.fixed === "true" && window.innerWidth > 760;
+    const isFixed = card.dataset.fixed === "true" && window.innerWidth > 1280;
     const rotationOffset = isFixed ? 0 : randomBetween(-6, 6);
     const baseZ = layer === "front" ? 70 + index : 10 + index;
 
@@ -651,6 +712,10 @@ collageCards.forEach((card) => {
   let dragMoved = false;
 
   card.addEventListener("pointerdown", (event) => {
+    if (isCompactLifeLayout()) {
+      return;
+    }
+
     pointerId = event.pointerId;
     offsetX = event.clientX - Number(card.dataset.x || 0);
     offsetY = event.clientY - Number(card.dataset.y || 0);

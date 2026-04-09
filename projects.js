@@ -3,6 +3,7 @@ window.PROJECTS = {
     slug: "chrono",
     pageTitle: "chrono | mateo tannahill",
     title: "chrono",
+    date: "march 2026",
     category: "figbuild 2026 designathon product launch",
     videoSrc: "assets/videos/chrono-web.mp4",
     videoType: "video/mp4",
@@ -24,6 +25,7 @@ window.PROJECTS = {
     slug: "ghostwriterrr",
     pageTitle: "ghostwriterrr.com | mateo tannahill",
     title: "ghostwriterrr.com",
+    date: "april 2026",
     category: "product launch",
     videoSrc: "assets/videos/ghostwriterrr-prod-launch-v3.mp4",
     videoType: "video/mp4",
@@ -43,6 +45,7 @@ window.PROJECTS = {
     slug: "cuba",
     pageTitle: "cuba | mateo tannahill",
     title: "cuba",
+    date: "may 2025",
     category: "personal film",
     videoSrc: "assets/videos/cuba.mp4",
     videoType: "video/mp4",
@@ -51,7 +54,7 @@ window.PROJECTS = {
       "frank ocean is one of my favourite artists and inspires much of my cinematic creative work. i wanted this piece to focus on the atmosphere, beautiful views, and the feeling of being there in cuba."
     ],
     gallery: [
-      { src: "assets/projects/cuba/still-01.png", alt: "cuba title frame at sunset", wide: true },
+      { src: "assets/projects/cuba/still-01.png", alt: "cuba title frame at sunset", wide: true, objectPosition: "center 42%" },
       { src: "assets/projects/cuba/still-02.png", alt: "cuba beach walkway at golden hour" },
       { src: "assets/projects/cuba/still-03.png", alt: "cuba beach swing at sunset", wide: true }
     ]
@@ -60,6 +63,7 @@ window.PROJECTS = {
     slug: "pokemon",
     pageTitle: "pokemon launch ad | mateo tannahill",
     title: "pokemon launch ad",
+    date: "december 2025",
     category: "website launch ad",
     videoSrc: "assets/videos/pokemon-promo-web.mp4",
     videoType: "video/mp4",
@@ -78,6 +82,7 @@ window.PROJECTS = {
     slug: "through-my-eyes",
     pageTitle: "2025 through my eyes | mateo tannahill",
     title: "2025 through my eyes",
+      date: "january 2026",
       category: "personal recap",
       videoSrc: "assets/videos/through-my-eyes-web.mp4",
       videoType: "video/mp4",
@@ -96,6 +101,7 @@ window.PROJECTS = {
     slug: "niagara-glen",
     pageTitle: "niagara glen w/ wloocc | mateo tannahill",
     title: "niagara glen w/ wloocc",
+    date: "october 2025",
     category: "cinematic recap",
     videoSrc: "assets/videos/niagara-glen-recap.mp4",
     videoType: "video/mp4",
@@ -105,5 +111,24 @@ window.PROJECTS = {
       "i worked under new conditions with natural lighting rather than a fixed set, and with a big group of individuals rather than actors. it was a great experience working with a larger group and taking a more creative approach to show the day trip in a fast-paced, engaging way while adapting to more unpredictable conditions."
     ],
     gallery: []
+  },
+  "lylas-house": {
+    slug: "lylas-house",
+    pageTitle: "sunday love | mateo tannahill",
+    title: "sunday love",
+    date: "july 2025",
+    category: "cafe ad for lylas house",
+    videoSrc: "../SUNDAY LOVE ｜ Lyla's House PROMO ｜ Sony A7ii.mp4",
+    videoType: "video/mp4",
+    copy: [
+      "cafe ad created for <a href=\"https://www.instagram.com/lylas.house/\" target=\"_blank\" rel=\"noreferrer\">lyla's house</a>, built around the soft pace and warmth of a sunday morning.",
+      "i worked closely with the owner to shape the piece around the cafe's instagram aesthetic, leaning into a nostalgic, cozy visual language filled with charming old-school details and a relaxed ambient feel."
+    ],
+    gallery: [
+      { src: "assets/projects/lylas-house/still-01.png", alt: "lyla's house pastry case title still", wide: true },
+      { src: "assets/projects/lylas-house/still-02.png", alt: "lyla's house cafe staff carrying matcha drinks" },
+      { src: "assets/projects/lylas-house/still-03.png", alt: "lyla's house pastry case still", wide: true },
+      { src: "assets/projects/lylas-house/still-04.png", alt: "lyla's house bar area with staff at work", wide: true }
+    ]
   }
 };

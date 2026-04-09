@@ -1,18 +1,17 @@
-const projectPageCursor = document.getElementById("fishCursor");
 const projectPageRevealItems = Array.from(document.querySelectorAll(".reveal-up, .intro-reveal"));
 const projectPageHeaderLinks = Array.from(document.querySelectorAll(".site-nav a"));
-const projectPageClickableSelector = "a, button, .project-gallery-card";
 const projectKey = document.body.dataset.project;
 const projectData = window.PROJECTS?.[projectKey];
 const projectPageBrandLink = document.querySelector(".brand");
-const projectPageCursorParent = projectPageCursor?.parentElement || null;
+const projectPageSupportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-let projectPageMouseX = window.innerWidth * 0.5;
-let projectPageMouseY = window.innerHeight * 0.5;
 let projectLastScrollY = window.scrollY;
 let projectClickAudioContext = null;
+const projectHeaderRevealTopThreshold = 18;
+const projectHeaderHideScrollThreshold = 72;
+const projectHeaderScrollDelta = 10;
 
-function playProjectClickSound() {
+function playProjectSoftClickSound() {
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   if (!AudioCtx) {
     return;
@@ -27,81 +26,66 @@ function playProjectClickSound() {
   }
 
   const now = projectClickAudioContext.currentTime;
-  const masterGain = projectClickAudioContext.createGain();
-  masterGain.gain.setValueAtTime(0.0001, now);
-  masterGain.gain.exponentialRampToValueAtTime(0.024, now + 0.001);
-  masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
-  masterGain.connect(projectClickAudioContext.destination);
+  const output = projectClickAudioContext.createGain();
+  output.gain.setValueAtTime(0.0001, now);
+  output.gain.exponentialRampToValueAtTime(0.038, now + 0.004);
+  output.gain.exponentialRampToValueAtTime(0.0001, now + 0.085);
+  output.connect(projectClickAudioContext.destination);
 
   const bodyOscillator = projectClickAudioContext.createOscillator();
   bodyOscillator.type = "triangle";
-  bodyOscillator.frequency.setValueAtTime(760, now);
-  bodyOscillator.frequency.exponentialRampToValueAtTime(490, now + 0.032);
+  bodyOscillator.frequency.setValueAtTime(240, now);
+  bodyOscillator.frequency.exponentialRampToValueAtTime(162, now + 0.05);
 
   const bodyFilter = projectClickAudioContext.createBiquadFilter();
   bodyFilter.type = "lowpass";
-  bodyFilter.frequency.setValueAtTime(1320, now);
-  bodyFilter.Q.value = 0.55;
+  bodyFilter.frequency.setValueAtTime(980, now);
+  bodyFilter.Q.value = 0.7;
 
-  const transientOscillator = projectClickAudioContext.createOscillator();
-  transientOscillator.type = "sine";
-  transientOscillator.frequency.setValueAtTime(1280, now);
-  transientOscillator.frequency.exponentialRampToValueAtTime(880, now + 0.014);
+  const bodyGain = projectClickAudioContext.createGain();
+  bodyGain.gain.setValueAtTime(0.0001, now);
+  bodyGain.gain.exponentialRampToValueAtTime(1.35, now + 0.003);
+  bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
 
-  const transientGain = projectClickAudioContext.createGain();
-  transientGain.gain.setValueAtTime(0.0001, now);
-  transientGain.gain.exponentialRampToValueAtTime(0.006, now + 0.001);
-  transientGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.014);
+  const tapOscillator = projectClickAudioContext.createOscillator();
+  tapOscillator.type = "sine";
+  tapOscillator.frequency.setValueAtTime(1220, now);
+  tapOscillator.frequency.exponentialRampToValueAtTime(760, now + 0.018);
+
+  const tapGain = projectClickAudioContext.createGain();
+  tapGain.gain.setValueAtTime(0.0001, now);
+  tapGain.gain.exponentialRampToValueAtTime(0.24, now + 0.0015);
+  tapGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.02);
 
   bodyOscillator.connect(bodyFilter);
-  bodyFilter.connect(masterGain);
-  transientOscillator.connect(transientGain);
-  transientGain.connect(masterGain);
+  bodyFilter.connect(bodyGain);
+  bodyGain.connect(output);
+  tapOscillator.connect(tapGain);
+  tapGain.connect(output);
 
   bodyOscillator.start(now);
-  transientOscillator.start(now);
-  bodyOscillator.stop(now + 0.05);
-  transientOscillator.stop(now + 0.02);
-}
-
-function setProjectCursorHoverState(isHoveringClickable) {
-  document.body.classList.toggle("is-hovering-clickable", isHoveringClickable);
-  if (projectPageCursor) {
-    projectPageCursor.classList.toggle("is-hovering-clickable", isHoveringClickable);
-  }
+  tapOscillator.start(now);
+  bodyOscillator.stop(now + 0.075);
+  tapOscillator.stop(now + 0.022);
 }
 
 function updateProjectHeaderVisibility() {
   const currentScrollY = window.scrollY;
-  const isScrollingDown = currentScrollY > projectLastScrollY + 8;
-  const isNearTop = currentScrollY < 24;
+  const isNearTop = currentScrollY <= projectHeaderRevealTopThreshold;
+  const isScrollingDown = currentScrollY > projectLastScrollY + projectHeaderScrollDelta;
+  const isScrollingUp = currentScrollY < projectLastScrollY - projectHeaderScrollDelta;
+  const hasScrolledPastHidePoint = currentScrollY > projectHeaderHideScrollThreshold;
 
-  if (isScrollingDown && !isNearTop) {
+  if (isNearTop) {
+    document.body.classList.remove("header-hidden");
+  } else if (isScrollingDown && hasScrolledPastHidePoint) {
     document.body.classList.add("header-hidden");
-  } else if (isNearTop) {
+  } else if (isScrollingUp) {
     document.body.classList.remove("header-hidden");
   }
 
   projectLastScrollY = currentScrollY;
 }
-
-function syncProjectCursorContainer() {
-  if (!projectPageCursor) {
-    return;
-  }
-
-  const fullscreenElement = document.fullscreenElement;
-
-  if (fullscreenElement && !fullscreenElement.contains(projectPageCursor)) {
-    fullscreenElement.appendChild(projectPageCursor);
-  } else if (!fullscreenElement && projectPageCursorParent && projectPageCursor.parentElement !== projectPageCursorParent) {
-    projectPageCursorParent.appendChild(projectPageCursor);
-  }
-
-  projectPageCursor.style.left = `${projectPageMouseX}px`;
-  projectPageCursor.style.top = `${projectPageMouseY}px`;
-}
-
 function hydrateProjectPage(project) {
   if (!project) {
     return;
@@ -132,8 +116,8 @@ function hydrateProjectPage(project) {
   }
 
   if (category) {
-    category.textContent = project.category;
-    category.hidden = !project.category;
+    category.textContent = project.date || project.category || "";
+    category.hidden = !(project.date || project.category);
   }
 
   if (videoSource) {
@@ -322,7 +306,7 @@ function hydrateProjectPage(project) {
       .map(
         (image) => `
           <figure class="project-gallery-card reveal-up${image.wide ? " is-wide" : ""}">
-            <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+            <img src="${image.src}" alt="${image.alt}" loading="lazy"${image.objectPosition ? ` style="object-position: ${image.objectPosition};"` : ""} />
           </figure>
         `
       )
@@ -385,34 +369,12 @@ projectPageHeaderLinks.forEach((link) => {
 });
 
 window.addEventListener("scroll", updateProjectHeaderVisibility, { passive: true });
-document.addEventListener("fullscreenchange", syncProjectCursorContainer);
 updateProjectHeaderVisibility();
-setProjectCursorHoverState(false);
-syncProjectCursorContainer();
 
-document.addEventListener("mousemove", (event) => {
-  projectPageMouseX = event.clientX;
-  projectPageMouseY = event.clientY;
-
-  if (projectPageCursor) {
-    projectPageCursor.style.left = `${projectPageMouseX}px`;
-    projectPageCursor.style.top = `${projectPageMouseY}px`;
-  }
-
-  const hovered = document.elementFromPoint(projectPageMouseX, projectPageMouseY);
-  setProjectCursorHoverState(hovered instanceof Element && Boolean(hovered.closest(projectPageClickableSelector)));
-});
-
-document.addEventListener("mousedown", (event) => {
-  document.body.classList.add("is-clicking");
-
-  if (event.button === 0) {
-    playProjectClickSound();
-  }
-});
-
-document.addEventListener("mouseup", () => {
-  window.setTimeout(() => {
-    document.body.classList.remove("is-clicking");
-  }, 120);
-});
+if (projectPageSupportsHover) {
+  document.addEventListener("mousedown", (event) => {
+    if (event.button === 0) {
+      playProjectSoftClickSound();
+    }
+  });
+}
