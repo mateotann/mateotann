@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    try {
+      if (localStorage.getItem("mt-inverted") === "on") {
+        document.documentElement.classList.add("inverted");
+      }
+    } catch (_) {}
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mateo tannahill — film &amp; creative direction</title>
+  <meta name="description" content="mateo tannahill — video and creative direction portfolio" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="mateo tannahill" />
+  <meta property="og:description" content="mateo tannahill — video and creative direction portfolio" />
+  <meta property="og:url" content="https://mateotannahill.com/" />
+  <meta property="og:image" content="https://mateotannahill.com/assets/ui/og-card.png" />
+  <link rel="icon" type="image/png" href="assets/ui/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/ui/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+</head>
+<body>
+
+  <header class="bar" id="bar">
+    <a class="bar-mark" href="#top">mateo tannahill</a>
+    <div class="bar-right">
+      <nav class="bar-nav" aria-label="primary">
+      <a href="#work">work</a>
+      <a href="#about">about</a>
+      <a href="#contact">contact</a>
+    </nav>
+      <button class="invert-toggle" id="invertToggle" type="button" aria-label="turn on dark mode" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 15.1A7.3 7.3 0 0 1 8.9 3.7 8.5 8.5 0 1 0 20.3 15.1Z"/></svg>
+    </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <p class="hero-eyebrow load-in load-in--1">film &amp; creative direction</p>
+      <h1 class="hero-line" id="heroHeadline"><span class="line">I make videos</span><br /><span class="line dim">that feel deliberate.</span></h1>
+      <p class="hero-sub load-in load-in--3">Currently creative media lead at <a href="https://lotus.ai/" target="_blank" rel="noreferrer">lotus&nbsp;AI</a> · second year @ uwaterloo · yyz&nbsp;/&nbsp;ykf&nbsp;/&nbsp;sfo</p>
+      <a class="hero-cta load-in load-in--4" href="#work">
+        <span>see the work</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>davinci resolve</span><span class="marquee-dot">&bull;</span>
+        <span>color grading</span><span class="marquee-dot">&bull;</span>
+        <span>sound design</span><span class="marquee-dot">&bull;</span>
+        <span>motion graphics</span><span class="marquee-dot">&bull;</span>
+        <span>cinematography</span><span class="marquee-dot">&bull;</span>
+        <span>davinci resolve</span><span class="marquee-dot">&bull;</span>
+        <span>color grading</span><span class="marquee-dot">&bull;</span>
+        <span>sound design</span><span class="marquee-dot">&bull;</span>
+        <span>motion graphics</span><span class="marquee-dot">&bull;</span>
+        <span>cinematography</span><span class="marquee-dot">&bull;</span>
+      </div>
+    </div>
+
+    <section class="work" id="work">
+      <div class="section-head">
+        <p class="section-eyebrow">selected work</p>
+        <h2>08 projects, '25&ndash;'26</h2>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <a class="card-visual" href="sf-trip.html" aria-label="open sf trip '26">
+            <img src="assets/projects/sf-trip/still-01.jpg" alt="" loading="lazy" />
+            <video muted loop playsinline preload="none"><source src="assets/videos/sf-trip-26.mp4" type="video/mp4" /></video>
+          </a>
+          <div class="card-meta">
+            <h3>sf trip &#39;26</h3>
+            <p>personal travel film</p>
+            <span>may 2026</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-visual" href="chrono.html" aria-label="open chrono">
+            <img src="assets/projects/chrono/still-01.jpg" alt="" loading="lazy" />
+            <video muted loop playsinline preload="none"><source src="assets/videos/chrono-web.mp4" type="video/mp4" /></video>
+          </a>
+          <div class="card-meta">
+            <h3>chrono</h3>
+            <p>figma designathon launch film</p>
+            <span>march 2026</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-visual" href="ghostwriterrr.html" aria-label="open ghostwriterrr.com">
+            <img src="assets/projects/ghostwriterrr/still-01.jpg" alt="" loading="lazy" />
+            <video muted loop playsinline preload="none"><source src="assets/videos/ghostwriterrr-prod-launch-v3.mp4" type="video/mp4" /></video>
+          </a>
+          <div class="card-meta">
+            <h3>ghostwriterrr.com</h3>
+            <p>product launch</p>
+            <span>april 2026</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-visual" href="through-my-eyes.html" aria-label="open 2025 through my eyes">
+            <img src="assets/projects/through-my-eyes/still-01.png" alt="" loading="lazy" />
+            <video muted loop playsinline preload="none"><source src="assets/videos/through-my-eyes-web.mp4" type="video/mp4" /></video>
+          </a>
+          <div class="card-meta">
+            <h3>2025 through my eyes</h3>
+            <p>personal recap</p>
+            <span>january 2026</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-visual" href="pokemon.html" aria-label="open pokemon launch ad">
+            <img src="assets/projects/pokemon/still-01.png" alt="" loading="lazy" />
+            <video muted loop playsinline preload="none"><source src="assets/videos/pokemon-promo-web.mp4" type="video/mp4" /></video>
+          </a>
+          <div class="card-meta">
+            <h3>pokemon launch ad</h3>
+            <p>short website launch ad</p>
+            <span>december 2025</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-visual" href="niagara-glen.html" aria-label="open niagara glen w/ wloocc">
+            <img src="assets/thumbnails/niagara-glen.png" alt="" loading="lazy" />
+            <video muted loop playsinline preload="none"><source src="assets/videos/niagara-glen-recap.mp4" type="video/mp4" /></video>
+          </a>
+          <div class="card-meta">
+            <h3>niagara glen w/ wloocc</h3>
+            <p>cinematic recap</p>
+            <span>october 2025</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-visual" href="lyla-house.html" aria-label="open sunday love">
+            <img src="assets/projects/lylas-house/still-01.png" alt="" loading="lazy" />
+            <video muted loop playsinline preload="none"><source src="assets/videos/sunday-love-lylas-house.mp4" type="video/mp4" /></video>
+          </a>
+          <div class="card-meta">
+            <h3>sunday love</h3>
+            <p>cafe ad for lylas house</p>
+            <span>july 2025</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-visual" href="cuba.html" aria-label="open cuba">
+            <img src="assets/projects/cuba/still-02.png" alt="" loading="lazy" />
+            <video muted loop playsinline preload="none"><source src="assets/videos/cuba.mp4" type="video/mp4" /></video>
+          </a>
+          <div class="card-meta">
+            <h3>cuba</h3>
+            <p>personal film</p>
+            <span>may 2025</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="section-head">
+        <p class="section-eyebrow">about</p>
+        <h2>Storytelling at the intersection<br /><span class="dim">of tech and media.</span></h2>
+      </div>
+      <div class="about-layout">
+        <div class="about-body">
+          <p>I've been shooting video since I was 12. Now I'm studying at UWaterloo and working as creative media lead at <a href="https://lotus.ai/" target="_blank" rel="noreferrer">lotus AI</a>, making work that sits between tech and media &mdash; personal, clean, and cinematic.</p>
+          <p>Past work includes videos for <a href="https://www.instagram.com/reel/DW10A0-j3LE/" target="_blank" rel="noreferrer">@designwaterloo</a> and <a href="https://www.instagram.com/reel/DVeLomtDiH0/" target="_blank" rel="noreferrer">socratica</a>, and campus marketing lead for the <a href="https://www.instagram.com/reel/DRnK3agD9h7/" target="_blank" rel="noreferrer">climbing club</a>. When I'm not editing, I'm traveling &mdash; most of what ends up on this site starts with a trip.</p>
+        </div>
+        <figure class="polaroid" id="polaroid" tabindex="0" aria-label="photo of mateo in san francisco, click for a note">
+          <div class="polaroid-photo"></div>
+          <figcaption>
+            <span class="polaroid-name">mateo, 2026</span>
+            <span class="polaroid-note">first time in sf, at the golden gate bridge.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="contact" id="contact">
+    <div class="contact-top">
+      <p class="section-eyebrow contact-eyebrow">get in touch</p>
+      <a class="contact-email" href="mailto:mateotannahill@gmail.com">mateotannahill@gmail.com</a>
+      <div class="contact-socials">
+        <a href="https://www.instagram.com/mateotannn" target="_blank" rel="noreferrer">instagram</a>
+        <a href="https://www.youtube.com/@mateotannn/search" target="_blank" rel="noreferrer">youtube</a>
+        <a href="https://www.linkedin.com/in/mateo-tannahill-74b795386/" target="_blank" rel="noreferrer">linkedin</a>
+        <a href="https://x.com/mateotannn" target="_blank" rel="noreferrer">x</a>
+      </div>
+    </div>
+
+    <div class="contact-bottom">
+      <p class="footer-copy">&copy; 2026 mateo tannahill</p>
+      <aside class="rec-strip" aria-label="live visitor status">
+        <span class="rec-dot" aria-hidden="true"></span>
+        <span class="rec-label">rec</span>
+        <span class="rec-divider" aria-hidden="true">/</span>
+        <span>last visitor from <strong id="visitorLocation">loading</strong></span>
+        <span id="visitorTime">checking previous visit</span>
+      </aside>
+    </div>
+  </footer>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

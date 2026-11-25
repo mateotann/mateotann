@@ -2,227 +2,510 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <script>
-    try {
-      if (localStorage.getItem("mt-inverted") === "on") {
-        document.documentElement.classList.add("inverted");
-      }
-    } catch (_) {}
-  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mateo tannahill — film &amp; creative direction</title>
-  <meta name="description" content="mateo tannahill — video and creative direction portfolio" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="mateo tannahill" />
-  <meta property="og:description" content="mateo tannahill — video and creative direction portfolio" />
-  <meta property="og:url" content="https://mateotannahill.com/" />
-  <meta property="og:image" content="https://mateotannahill.com/assets/ui/og-card.png" />
-  <link rel="icon" type="image/png" href="assets/ui/favicon.png" />
-  <link rel="apple-touch-icon" href="assets/ui/apple-touch-icon.png" />
-  <link rel="preconnect" href="https://api.fontshare.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <title>mateo tannahill</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: #fff; }
+    body {
+      color: #111;
+      font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      cursor: default;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    main {
+      min-height: 100%;
+      max-width: 34rem;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+    }
+    @media (min-width: 640px) { main { padding: 4rem; } }
+    /* wireframe placeholders: replace with final copy */
+    .ph { color: #9a9a9a; }
+    .cam {
+      display: block;
+      width: 188px; /* the rig itself is drawn the same size; the extra room is for turning */
+      height: auto;
+      aspect-ratio: 188 / 170;
+      margin: -10px 0 calc(0.5rem - 10px) -34px;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      cursor: grab;
+      touch-action: none;
+    }
+    .cam.grabbing { cursor: grabbing; }
+    main p { width: fit-content; }
+    main a .ch {
+      display: inline-block;
+      white-space: pre;
+      transform-origin: 50% 50%;
+      transition: transform 0.14s ease-out;
+      will-change: transform;
+    }
+    main a {
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+    main a:focus-visible { outline: 1px dotted #111; outline-offset: 4px; }
+    #trail {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
-
-  <header class="bar" id="bar">
-    <a class="bar-mark" href="#top">mateo tannahill</a>
-    <div class="bar-right">
-      <nav class="bar-nav" aria-label="primary">
-      <a href="#work">work</a>
-      <a href="#about">about</a>
-      <a href="#contact">contact</a>
-    </nav>
-      <button class="invert-toggle" id="invertToggle" type="button" aria-label="turn on dark mode" aria-pressed="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 15.1A7.3 7.3 0 0 1 8.9 3.7 8.5 8.5 0 1 0 20.3 15.1Z"/></svg>
-    </button>
-    </div>
-  </header>
-
   <main>
-    <section class="hero" id="top">
-      <p class="hero-eyebrow load-in load-in--1">film &amp; creative direction</p>
-      <h1 class="hero-line" id="heroHeadline"><span class="line">I make videos</span><br /><span class="line dim">that feel deliberate.</span></h1>
-      <p class="hero-sub load-in load-in--3">Currently creative media lead at <a href="https://lotus.ai/" target="_blank" rel="noreferrer">lotus&nbsp;AI</a> · second year @ uwaterloo · yyz&nbsp;/&nbsp;ykf&nbsp;/&nbsp;sfo</p>
-      <a class="hero-cta load-in load-in--4" href="#work">
-        <span>see the work</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </section>
-
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>davinci resolve</span><span class="marquee-dot">&bull;</span>
-        <span>color grading</span><span class="marquee-dot">&bull;</span>
-        <span>sound design</span><span class="marquee-dot">&bull;</span>
-        <span>motion graphics</span><span class="marquee-dot">&bull;</span>
-        <span>cinematography</span><span class="marquee-dot">&bull;</span>
-        <span>davinci resolve</span><span class="marquee-dot">&bull;</span>
-        <span>color grading</span><span class="marquee-dot">&bull;</span>
-        <span>sound design</span><span class="marquee-dot">&bull;</span>
-        <span>motion graphics</span><span class="marquee-dot">&bull;</span>
-        <span>cinematography</span><span class="marquee-dot">&bull;</span>
-      </div>
-    </div>
-
-    <section class="work" id="work">
-      <div class="section-head">
-        <p class="section-eyebrow">selected work</p>
-        <h2>08 projects, '25&ndash;'26</h2>
-      </div>
-
-      <div class="grid">
-        <article class="card">
-          <a class="card-visual" href="sf-trip.html" aria-label="open sf trip '26">
-            <img src="assets/projects/sf-trip/still-01.jpg" alt="" loading="lazy" />
-            <video muted loop playsinline preload="none"><source src="assets/videos/sf-trip-26.mp4" type="video/mp4" /></video>
-          </a>
-          <div class="card-meta">
-            <h3>sf trip &#39;26</h3>
-            <p>personal travel film</p>
-            <span>may 2026</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-visual" href="chrono.html" aria-label="open chrono">
-            <img src="assets/projects/chrono/still-01.jpg" alt="" loading="lazy" />
-            <video muted loop playsinline preload="none"><source src="assets/videos/chrono-web.mp4" type="video/mp4" /></video>
-          </a>
-          <div class="card-meta">
-            <h3>chrono</h3>
-            <p>figma designathon launch film</p>
-            <span>march 2026</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-visual" href="ghostwriterrr.html" aria-label="open ghostwriterrr.com">
-            <img src="assets/projects/ghostwriterrr/still-01.jpg" alt="" loading="lazy" />
-            <video muted loop playsinline preload="none"><source src="assets/videos/ghostwriterrr-prod-launch-v3.mp4" type="video/mp4" /></video>
-          </a>
-          <div class="card-meta">
-            <h3>ghostwriterrr.com</h3>
-            <p>product launch</p>
-            <span>april 2026</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-visual" href="through-my-eyes.html" aria-label="open 2025 through my eyes">
-            <img src="assets/projects/through-my-eyes/still-01.png" alt="" loading="lazy" />
-            <video muted loop playsinline preload="none"><source src="assets/videos/through-my-eyes-web.mp4" type="video/mp4" /></video>
-          </a>
-          <div class="card-meta">
-            <h3>2025 through my eyes</h3>
-            <p>personal recap</p>
-            <span>january 2026</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-visual" href="pokemon.html" aria-label="open pokemon launch ad">
-            <img src="assets/projects/pokemon/still-01.png" alt="" loading="lazy" />
-            <video muted loop playsinline preload="none"><source src="assets/videos/pokemon-promo-web.mp4" type="video/mp4" /></video>
-          </a>
-          <div class="card-meta">
-            <h3>pokemon launch ad</h3>
-            <p>short website launch ad</p>
-            <span>december 2025</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-visual" href="niagara-glen.html" aria-label="open niagara glen w/ wloocc">
-            <img src="assets/thumbnails/niagara-glen.png" alt="" loading="lazy" />
-            <video muted loop playsinline preload="none"><source src="assets/videos/niagara-glen-recap.mp4" type="video/mp4" /></video>
-          </a>
-          <div class="card-meta">
-            <h3>niagara glen w/ wloocc</h3>
-            <p>cinematic recap</p>
-            <span>october 2025</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-visual" href="lyla-house.html" aria-label="open sunday love">
-            <img src="assets/projects/lylas-house/still-01.png" alt="" loading="lazy" />
-            <video muted loop playsinline preload="none"><source src="assets/videos/sunday-love-lylas-house.mp4" type="video/mp4" /></video>
-          </a>
-          <div class="card-meta">
-            <h3>sunday love</h3>
-            <p>cafe ad for lylas house</p>
-            <span>july 2025</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-visual" href="cuba.html" aria-label="open cuba">
-            <img src="assets/projects/cuba/still-02.png" alt="" loading="lazy" />
-            <video muted loop playsinline preload="none"><source src="assets/videos/cuba.mp4" type="video/mp4" /></video>
-          </a>
-          <div class="card-meta">
-            <h3>cuba</h3>
-            <p>personal film</p>
-            <span>may 2025</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="about" id="about">
-      <div class="section-head">
-        <p class="section-eyebrow">about</p>
-        <h2>Storytelling at the intersection<br /><span class="dim">of tech and media.</span></h2>
-      </div>
-      <div class="about-layout">
-        <div class="about-body">
-          <p>I've been shooting video since I was 12. Now I'm studying at UWaterloo and working as creative media lead at <a href="https://lotus.ai/" target="_blank" rel="noreferrer">lotus AI</a>, making work that sits between tech and media &mdash; personal, clean, and cinematic.</p>
-          <p>Past work includes videos for <a href="https://www.instagram.com/reel/DW10A0-j3LE/" target="_blank" rel="noreferrer">@designwaterloo</a> and <a href="https://www.instagram.com/reel/DVeLomtDiH0/" target="_blank" rel="noreferrer">socratica</a>, and campus marketing lead for the <a href="https://www.instagram.com/reel/DRnK3agD9h7/" target="_blank" rel="noreferrer">climbing club</a>. When I'm not editing, I'm traveling &mdash; most of what ends up on this site starts with a trip.</p>
-        </div>
-        <figure class="polaroid" id="polaroid" tabindex="0" aria-label="photo of mateo in san francisco, click for a note">
-          <div class="polaroid-photo"></div>
-          <figcaption>
-            <span class="polaroid-name">mateo, 2026</span>
-            <span class="polaroid-note">first time in sf, at the golden gate bridge.</span>
-          </figcaption>
-        </figure>
-      </div>
-    </section>
+    <canvas class="cam" id="cam" width="188" height="170" aria-hidden="true"></canvas>
+    <p data-trail="star"><a href="https://www.instagram.com/mateotannn/" target="_blank" rel="noopener">mateo tannahill</a></p>
+    <p data-trail="circle">19, cinematographer</p>
+    <p>currently @ <a href="https://www.instagram.com/stanforcreators/" data-trail="stan" target="_blank" rel="noopener">stan</a>, prev @ <a href="https://www.instagram.com/lotus/" data-trail="lotus" target="_blank" rel="noopener">lotus ai</a></p>
+    <p data-trail="mail"><a href="mailto:mateotannahill@gmail.com">[mateotannahill@gmail.com]</a></p>
   </main>
-
-  <footer class="contact" id="contact">
-    <div class="contact-top">
-      <p class="section-eyebrow contact-eyebrow">get in touch</p>
-      <a class="contact-email" href="mailto:mateotannahill@gmail.com">mateotannahill@gmail.com</a>
-      <div class="contact-socials">
-        <a href="https://www.instagram.com/mateotannn" target="_blank" rel="noreferrer">instagram</a>
-        <a href="https://www.youtube.com/@mateotannn/search" target="_blank" rel="noreferrer">youtube</a>
-        <a href="https://www.linkedin.com/in/mateo-tannahill-74b795386/" target="_blank" rel="noreferrer">linkedin</a>
-        <a href="https://x.com/mateotannn" target="_blank" rel="noreferrer">x</a>
-      </div>
-    </div>
-
-    <div class="contact-bottom">
-      <p class="footer-copy">&copy; 2026 mateo tannahill</p>
-      <aside class="rec-strip" aria-label="live visitor status">
-        <span class="rec-dot" aria-hidden="true"></span>
-        <span class="rec-label">rec</span>
-        <span class="rec-divider" aria-hidden="true">/</span>
-        <span>last visitor from <strong id="visitorLocation">loading</strong></span>
-        <span id="visitorTime">checking previous visit</span>
-      </aside>
-    </div>
-  </footer>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    // my fx3 rig as a spinning 3D model, built from simple shapes (sizes in cm), then pushed
+    // through the same look as before: 140 colour pixels wide, limited palette, slow shimmer
+    (function () {
+      if (!window.THREE) return;
+      var W = 188, H = 170; // wide enough that the mic clears the edge at every angle
+      var LEVELS = 7; // shades per colour channel
+      var canvas = document.getElementById("cam");
+      canvas.width = W;
+      canvas.height = H;
+      var ctx = canvas.getContext("2d");
+      var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var bayer = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+
+      var renderer;
+      try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, preserveDrawingBuffer: true }); }
+      catch (e) { return; }
+      renderer.setPixelRatio(1);
+      renderer.setSize(W, H, false);
+      renderer.setClearColor(0x000000, 0);
+      renderer.outputEncoding = THREE.sRGBEncoding;
+
+      var scene = new THREE.Scene();
+      var cam = new THREE.PerspectiveCamera(27.1, W / H, 1, 400);
+      cam.position.set(0, 16, 98);
+      cam.lookAt(0, 5.4, 0); // centred on the axis the rig turns about
+
+      // studio lighting: a dark room with three softboxes, baked into reflections so the black
+      // plastic and metal pick up the soft highlights a photo of the real rig has
+      (function () {
+        var room = new THREE.Scene();
+        var wall = new THREE.Mesh(new THREE.BoxGeometry(200, 200, 200), new THREE.MeshBasicMaterial({ color: 0x0a0a0c, side: THREE.BackSide }));
+        room.add(wall);
+        function softbox(w, h, x, y, z, power, tint) {
+          var m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(tint).multiplyScalar(power), side: THREE.DoubleSide }));
+          m.position.set(x, y, z); m.lookAt(0, 0, 0); room.add(m);
+        }
+        softbox(90, 60, -60, 70, 60, 9, 0xfff1dc);   // warm key, upper left
+        softbox(60, 90, 90, 10, 20, 3, 0xdfe9ff);    // cool fill, right
+        softbox(120, 30, 0, 60, -90, 5, 0xffffff);   // rim, behind
+        softbox(160, 160, 0, -99, 0, 0.6, 0xffffff); // faint bounce from the floor
+        var pmrem = new THREE.PMREMGenerator(renderer);
+        scene.environment = pmrem.fromScene(room, 0.03).texture;
+        pmrem.dispose();
+      })();
+      scene.add(new THREE.AmbientLight(0xffffff, 0.05));
+      var key = new THREE.DirectionalLight(0xfff1dc, 0.55); key.position.set(-30, 50, 60); scene.add(key);
+
+      var rig = new THREE.Group();
+      scene.add(rig);
+      function mat(color, rough, metal) { return new THREE.MeshStandardMaterial({ color: color, roughness: rough, metalness: metal || 0 }); }
+      var BODY = mat(0x161618, 0.55), DARK = mat(0x0c0c0e, 0.62), RUBBER = mat(0x121214, 0.9),
+          CAGE = mat(0x1b1b1e, 0.42, 0.55), SILVER = mat(0xb8bbc3, 0.3, 1), FOAM = mat(0x1e1d22, 1),
+          BLUE = mat(0x1f93d6, 0.55), BRASS = mat(0x8f9450, 0.38, 0.75), RED = mat(0xc9241b, 0.5),
+          HOLE = new THREE.MeshBasicMaterial({ color: 0x000000 });
+      function add(geo, m, x, y, z, parent) { var o = new THREE.Mesh(geo, m); o.position.set(x, y, z); (parent || rig).add(o); return o; }
+      function box(w, h, d, m, x, y, z, parent) { return add(new THREE.BoxGeometry(w, h, d), m, x, y, z, parent); }
+      // cylinder lying along the lens axis (z)
+      function barrel(r1, r2, len, m, x, y, z, parent) {
+        var o = add(new THREE.CylinderGeometry(r1, r2, len, 48), m, x, y, z, parent);
+        o.rotation.x = Math.PI / 2;
+        return o;
+      }
+      function post(r, len, m, x, y, z, parent) { return add(new THREE.CylinderGeometry(r, r, len, 28), m, x, y, z, parent); }
+      function ball(r, m, x, y, z, parent) { return add(new THREE.SphereGeometry(r, 24, 16), m, x, y, z, parent); }
+      // a ring of knurled ribs round the lens axis
+      function ribs(r, z0, len, count, m, x) {
+        for (var i = 0; i < count; i++) barrel(r, r, len / count * 0.55, m, x, 0, z0 + len * (i + 0.5) / count);
+      }
+
+      // ---- camera body ----
+      box(12.6, 7.6, 7.2, BODY, 0, 0, 0);
+      box(12.2, 0.5, 6.6, DARK, 0, 3.9, 0);                         // top plate
+      post(1.9, 7.6, RUBBER, -5.0, 0, 2.6);                         // rounded hand grip
+      box(3.6, 7.6, 5.2, RUBBER, -5.0, 0, 0.2);
+      barrel(3.5, 3.5, 0.7, SILVER, 1.2, 0, 3.75);                  // lens mount
+      box(1.1, 0.7, 0.12, mat(0xe8742a, 0.5), 5.0, 2.7, 3.62);      // orange alpha badge
+      ball(0.3, RED, -3.4, 3.0, 3.62);                              // tally light
+      post(0.55, 0.3, DARK, -4.6, 4.2, 1.6); post(0.38, 0.14, RED, -4.6, 4.38, 1.6);   // record button
+      post(0.45, 0.3, DARK, -2.6, 4.2, 0.4); post(0.45, 0.3, DARK, -1.2, 4.2, 0.4);
+      post(0.7, 0.5, DARK, 3.6, 4.3, -1.2);                         // mode dial
+
+      // ---- cage: rails round the front and back faces, drilled with mounting holes ----
+      [3.7, -3.7].forEach(function (z) {
+        box(13.6, 0.7, 0.5, CAGE, 0, 4.15, z); box(13.6, 0.7, 0.5, CAGE, 0, -4.15, z);
+        box(0.7, 8.9, 0.5, CAGE, 6.6, 0, z); box(0.7, 8.9, 0.5, CAGE, -6.6, 0, z);
+      });
+      box(0.5, 0.7, 7.9, CAGE, 6.6, 4.15, 0); box(0.5, 0.7, 7.9, CAGE, -6.6, 4.15, 0);
+      box(13.6, 0.6, 7.9, CAGE, 0, -4.4, 0);                        // base plate
+      for (var hx = -4.5; hx <= 4.6; hx += 1.5) barrel(0.22, 0.22, 0.6, HOLE, hx, 4.15, 3.72);
+      for (var hy = -3; hy <= 3.1; hy += 1.5) barrel(0.22, 0.22, 0.6, HOLE, 6.6, hy, 3.72);
+
+      // ---- lens: 16-35, ribbed zoom and focus rings, red ring, brass-green filter, black front ----
+      var LX = 1.2;
+      barrel(3.9, 3.6, 2.6, DARK, LX, 0, 5.4);
+      barrel(4.12, 4.12, 3.3, DARK, LX, 0, 8.35); ribs(4.28, 6.7, 3.3, 11, RUBBER, LX);       // zoom ring
+      barrel(4.18, 4.18, 0.22, RED, LX, 0, 10.15);
+      barrel(4.2, 4.2, 3.2, DARK, LX, 0, 11.9); ribs(4.36, 10.3, 3.2, 14, RUBBER, LX);        // focus ring
+      barrel(4.55, 4.4, 1.3, BODY, LX, 0, 14.15);
+      barrel(4.78, 4.78, 0.95, BRASS, LX, 0, 15.3);                 // variable nd ring
+      barrel(4.82, 4.82, 0.12, mat(0x5e6130, 0.5, 0.6), LX, 0, 15.0);
+      add(new THREE.RingGeometry(4.3, 4.78, 56), mat(0x777a40, 0.45, 0.7), LX, 0, 15.78);
+      add(new THREE.CircleGeometry(4.32, 56), HOLE, LX, 0, 15.79);  // front of the lens: flat, fully black
+
+      // ---- top handle with its row of holes, monitor mount on the front ----
+      box(1.7, 1.3, 12.5, CAGE, 0, 6.9, -0.4);
+      box(1.7, 2.2, 1.5, CAGE, 0, 5.4, 4.6); box(1.7, 2.2, 1.5, CAGE, 0, 5.4, -5.4);
+      for (var hz = -4.2; hz <= 3.4; hz += 1.5) { var hh = post(0.3, 1.9, HOLE, 0, 6.9, hz); hh.rotation.z = Math.PI / 2; }
+      post(0.95, 0.6, SILVER, 0, 7.85, 4.6); post(0.7, 1.0, DARK, 0, 8.6, 4.6); post(0.95, 0.5, SILVER, 0, 9.3, 4.6);
+      box(2.2, 1.6, 2.2, DARK, 0, 10.3, 4.6);
+
+      // ---- monitor: bumper, screen facing the operator, battery on the back ----
+      var monitor = new THREE.Group();
+      monitor.position.set(0, 15.6, 4.6);
+      monitor.rotation.x = 0.16;
+      rig.add(monitor);
+      box(15.1, 9.2, 2.4, BODY, 0, 0, 0, monitor);
+      box(15.5, 9.6, 1.2, RUBBER, 0, 0, -0.7, monitor);            // rubber bumper round the screen side
+      box(13.4, 7.6, 0.1, new THREE.MeshStandardMaterial({ color: 0x050a16, roughness: 0.12, metalness: 0.2, emissive: 0x0a2a63, emissiveIntensity: 0.45 }), 0, 0, -1.32, monitor);
+      box(6.4, 6.6, 0.5, DARK, -3.3, 0, 1.4, monitor);             // battery plate
+      box(4.2, 7.2, 2.0, BODY, -3.6, 0, 2.3, monitor);             // battery
+      for (var v = 0; v < 5; v++) box(3.6, 0.22, 0.1, HOLE, 4.6, 1.4 - v * 0.7, 1.21, monitor);  // vents
+      box(1.5, 1.5, 1.0, SILVER, 8.2, 1.6, 0, monitor);            // hdmi plug
+
+      // ---- v-mount battery on the back ----
+      box(9.2, 11.8, 4.6, BODY, 1, 1.4, -7.0);
+      box(9.4, 1.2, 4.8, DARK, 1, 6.2, -7.0);
+      box(6.4, 3.2, 0.2, DARK, 1, 3.6, -9.35);
+      for (var d = 0; d < 4; d++) ball(0.16, mat(0x35d06a, 0.4), -1.2 + d * 0.6, -2.6, -9.32);   // charge leds
+
+      // ---- side handle on its clamp, cold shoe, shotgun mic in its shock mount ----
+      box(3.2, 0.9, 0.9, CAGE, 8.3, -0.4, 1);
+      post(1.75, 9.4, RUBBER, 10.6, -1.4, 1);
+      ball(1.75, RUBBER, 10.6, -6.1, 1); ball(1.75, RUBBER, 10.6, 3.3, 1);
+      box(0.5, 6.4, 0.3, HOLE, 10.6, -1.6, 2.7);                    // slot down the front of the handle
+      ball(0.3, SILVER, 10.6, -5.2, 2.6); ball(0.3, SILVER, 10.6, -5.9, 2.5);
+      post(1.2, 0.5, DARK, 10.6, 5.1, 1); post(1.35, 0.5, CAGE, 10.6, 5.6, 1);
+      box(3.2, 0.8, 4.4, DARK, 10.6, 6.3, 1);
+      [2.4, -0.6].forEach(function (z) {                             // shock mount hoops
+        var hoop = add(new THREE.TorusGeometry(1.7, 0.2, 10, 28), DARK, 10.6, 8.1, z);
+        add(new THREE.TorusGeometry(1.15, 0.14, 8, 24), mat(0xe8642a, 0.6), 10.6, 8.1, z);
+      });
+      barrel(1.0, 1.0, 13.5, CAGE, 10.6, 8.1, -1.6);                // mic body
+      barrel(2.6, 2.6, 8.2, FOAM, 10.6, 8.1, 9.3);                  // foam windscreen
+      var nose = ball(2.6, FOAM, 10.6, 8.1, 13.4); nose.scale.z = 1.25;
+      ball(2.6, FOAM, 10.6, 8.1, 5.2);
+
+      // coiled cables: a helix wound round the line between two points
+      class Coil extends THREE.Curve {
+        constructor(a, b, r, turns) {
+          super();
+          this.a = a; this.b = b; this.r = r; this.turns = turns;
+          var axis = b.clone().sub(a).normalize();
+          this.u = new THREE.Vector3(0, 1, 0).cross(axis);
+          if (this.u.lengthSq() < 0.01) this.u.set(1, 0, 0);
+          this.u.normalize();
+          this.v = axis.clone().cross(this.u).normalize();
+        }
+        getPoint(t) {
+          var rr = this.r * Math.min(1, Math.sin(Math.PI * t) * 4);   // straighten out at both ends
+          var ang = t * this.turns * Math.PI * 2;
+          return this.a.clone().lerp(this.b, t)
+            .addScaledVector(this.u, Math.cos(ang) * rr)
+            .addScaledVector(this.v, Math.sin(ang) * rr);
+        }
+      }
+      function cable(a, b, r, turns, thick, m) {
+        rig.add(new THREE.Mesh(new THREE.TubeGeometry(new Coil(a, b, r, turns), turns * 14, thick, 6), m));
+      }
+      cable(new THREE.Vector3(8.8, 16.6, 4.8), new THREE.Vector3(10.6, 8.4, -8.2), 0.75, 12, 0.24, BLUE);   // monitor to mic
+      cable(new THREE.Vector3(10.6, 7.6, -8.4), new THREE.Vector3(6.9, 1, -3.4), 0.6, 7, 0.22, BLUE);          // mic to camera
+      cable(new THREE.Vector3(-7.6, 14.8, 3.6), new THREE.Vector3(-3.4, 3, -9.2), 0.7, 14, 0.25, mat(0x0a0a0c, 0.6)); // power lead
+
+      // ---- same pixel treatment as the photo version ----
+      var out = ctx.createImageData(W, H);
+      var px = new Uint8Array(W * H * 4);
+      var gl = renderer.getContext();
+      var frame = 0;
+      var angle = -0.5; // resting view: front three-quarter, lens toward the viewer
+      function draw() {
+        rig.rotation.y = angle;
+        renderer.render(scene, cam);
+        gl.readPixels(0, 0, W, H, gl.RGBA, gl.UNSIGNED_BYTE, px);
+        var shift = frame % 4;
+        for (var y = 0; y < H; y++) {
+          for (var x = 0; x < W; x++) {
+            var i = y * W + x, j = ((H - 1 - y) * W + x) * 4;     // gl rows are bottom-up
+            var a = px[j + 3];
+            if (a < 128) { out.data[i * 4 + 3] = 0; continue; }
+            var th = (bayer[((y + shift) & 3) * 4 + ((x + (shift >> 1)) & 3)] + 0.5) / 16 - 0.5;
+            for (var c = 0; c < 3; c++) {
+              var v = px[j + c] / a * (LEVELS - 1) + th;           // un-premultiply, then snap to the palette
+              out.data[i * 4 + c] = Math.max(0, Math.min(LEVELS - 1, Math.round(v))) * 255 / (LEVELS - 1);
+            }
+            out.data[i * 4 + 3] = 255;
+          }
+        }
+        ctx.putImageData(out, 0, 0);
+        frame++;
+      }
+      draw();
+      if (!still) setInterval(draw, 260); // slow shimmer only; the rig turns when dragged
+
+      // drag left or right to turn the rig; it coasts briefly after you let go
+      var dragging = false, lastX = 0, vel = 0, coasting = false;
+      function coast() {
+        if (dragging || Math.abs(vel) < 0.002) { coasting = false; return; }
+        angle += vel; vel *= 0.92; draw();
+        requestAnimationFrame(coast);
+      }
+      canvas.addEventListener("pointerdown", function (e) {
+        dragging = true; lastX = e.clientX; vel = 0;
+        canvas.setPointerCapture(e.pointerId);
+        canvas.classList.add("grabbing");
+        e.preventDefault();
+      });
+      canvas.addEventListener("pointermove", function (e) {
+        if (!dragging) return;
+        vel = (e.clientX - lastX) * 0.022;
+        angle += vel; lastX = e.clientX;
+        draw();
+      });
+      function release() {
+        if (!dragging) return;
+        dragging = false;
+        canvas.classList.remove("grabbing");
+        if (!still && !coasting) { coasting = true; requestAnimationFrame(coast); }
+      }
+      canvas.addEventListener("pointerup", release);
+      canvas.addEventListener("pointercancel", release);
+    })();
   </script>
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script src="script.js"></script>
+  <script>
+    // links: letters stretch sideways under the cursor while the letters either side compress
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var REACH = 26; // px: how far from the cursor a letter still reacts
+      document.querySelectorAll("main a").forEach(function (link) {
+        var text = link.textContent;
+        link.setAttribute("aria-label", text);
+        link.textContent = "";
+        var letters = text.split("").map(function (c) {
+          var span = document.createElement("span");
+          span.className = "ch";
+          span.setAttribute("aria-hidden", "true");
+          span.textContent = c;
+          link.appendChild(span);
+          return span;
+        });
+        var centers = [], widths = [];
+        function measure() {
+          centers = letters.map(function (el) {
+            return el.offsetLeft - link.offsetLeft + el.offsetWidth / 2;
+          });
+          widths = letters.map(function (el) { return el.offsetWidth; });
+        }
+        link.addEventListener("pointerenter", measure);
+        link.addEventListener("pointermove", function (e) {
+          if (e.pointerType && e.pointerType !== "mouse") return;
+          if (!centers.length) measure();
+          var x = e.clientX - link.getBoundingClientRect().left;
+          var sx = [], extra = 0, before = 0, i;
+          for (i = 0; i < letters.length; i++) {
+            var d = (centers[i] - x) / REACH;
+            // "mexican hat": positive at the cursor (stretch), negative just outside it (compress)
+            var w = (1 - d * d) * Math.exp(-d * d / 2);
+            sx[i] = 1 + 0.55 * w;
+            if (centers[i] < x) before += widths[i] * (sx[i] - 1);
+            extra += widths[i] * (sx[i] - 1);
+          }
+          // slide each letter so widened ones push their neighbours aside instead of overlapping,
+          // keeping the spot under the cursor in place
+          var run = -before;
+          for (i = 0; i < letters.length; i++) {
+            var grow = widths[i] * (sx[i] - 1);
+            var tx = run + grow / 2;
+            run += grow;
+            letters[i].style.transform = "translateX(" + tx.toFixed(2) + "px) scaleX(" + sx[i].toFixed(3) + ")";
+          }
+        });
+        link.addEventListener("pointerleave", function () {
+          for (var i = 0; i < letters.length; i++) letters[i].style.transform = "";
+        });
+      });
+    })();
+  </script>
+  <canvas id="trail" aria-hidden="true"></canvas>
+  <script>
+    // cursor trail: blue pixels by default, a pixel sprite while over each line of text
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var PX = 2;      // size of one sprite pixel, in CSS px
+      var BLUE = 7;    // size of one blue trail pixel, in CSS px
+      var LIFE = 650;  // ms a mark stays before it has faded out
+      var canvas = document.getElementById("trail");
+      var ctx = canvas.getContext("2d");
+      var dpr = 1;
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.round(window.innerWidth * dpr);
+        canvas.height = Math.round(window.innerHeight * dpr);
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      var sprites = {
+        pixel: { px: BLUE, gap: BLUE, colors: { "#": "#2f6bff" }, rows: ["#"] },
+        star: {
+          gap: 16, colors: { "#": "#f5c400" },
+          rows: [
+            "....#....",
+            "....#....",
+            "...###...",
+            "#########",
+            ".#######.",
+            "..#####..",
+            "..#####..",
+            ".##...##.",
+            ".#.....#."
+          ]
+        },
+        circle: {
+          gap: 14, colors: { "#": "#8b3dff" },
+          rows: [
+            "..###..",
+            ".#####.",
+            "#######",
+            "#######",
+            "#######",
+            ".#####.",
+            "..###.."
+          ]
+        },
+        stan: {
+          gap: 26, colors: { a: "#6a57ff", b: "#4767ff", w: "#ffffff" },
+          rows: [
+            ".....aaaaa.....",
+            "...aaaaaaaaa...",
+            "..aaaaaaaaaaa..",
+            ".aaaaaawaaaaaa.",
+            ".aaaaawwwaaaaa.",
+            "aaaaawaaawaaaaa",
+            "aaaaawaaaaaaaaa",
+            "aaaaaawwwaaaaaa",
+            "bbbbbbbbbwbbbbb",
+            "bbbbbwbbbwbbbbb",
+            ".bbbbbwwwbbbbb.",
+            ".bbbbbbwbbbbbb.",
+            "..bbbbbbbbbbb..",
+            "...bbbbbbbbb...",
+            ".....bbbbb....."
+          ]
+        },
+        lotus: {
+          gap: 30, colors: { "#": "#111111" },
+          rows: [
+            ".........#.........",
+            "........#.#........",
+            ".......#...#.......",
+            "...###.#...#.###...",
+            "...#..##...##..#...",
+            "...#...#...#...#...",
+            "....#...#.#...#....",
+            "..####..#.#..####..",
+            ".#....##.#.##....#.",
+            "#.......###.......#",
+            ".#....##.#.##....#.",
+            "..####.......####.."
+          ]
+        },
+        mail: {
+          gap: 20, colors: { o: "#7d7d8c", w: "#ffffff", h: "#ff3f7f" },
+          rows: [
+            "ooooooooooo",
+            "oowwwwwwwoo",
+            "owowwwwwowo",
+            "owwohwhowwo",
+            "owwhhhhhwwo",
+            "owwwhhhwwwo",
+            "owwwwhwwwwo",
+            "owwwwwwwwwo",
+            "ooooooooooo"
+          ]
+        }
+      };
+
+      var marks = [];
+      var last = null;
+      var running = false;
+
+      window.addEventListener("pointermove", function (e) {
+        if (e.pointerType && e.pointerType !== "mouse") return;
+        var el = e.target.closest ? e.target.closest("[data-trail]") : null;
+        var kind = el ? el.getAttribute("data-trail") : "pixel";
+        var sp = sprites[kind];
+        if (last && last.kind === kind && Math.hypot(e.clientX - last.x, e.clientY - last.y) < sp.gap) return;
+        last = { x: e.clientX, y: e.clientY, kind: kind };
+        var jitter = kind === "pixel" ? BLUE : 0;
+        marks.push({
+          sp: sp,
+          x: e.clientX + (Math.random() - 0.5) * 2 * jitter,
+          y: e.clientY + (Math.random() - 0.5) * 2 * jitter,
+          born: performance.now()
+        });
+        if (!running) { running = true; requestAnimationFrame(frame); }
+      });
+
+      function frame(now) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        marks = marks.filter(function (m) { return now - m.born < LIFE; });
+        for (var k = 0; k < marks.length; k++) {
+          var m = marks[k], rows = m.sp.rows, px = m.sp.px || PX;
+          var x0 = Math.round(m.x - (rows[0].length * px) / 2);
+          var y0 = Math.round(m.y - (rows.length * px) / 2);
+          if (m.sp.px) { // snap blue pixels to a grid so they read as pixels
+            x0 = Math.round(x0 / px) * px;
+            y0 = Math.round(y0 / px) * px;
+          }
+          ctx.globalAlpha = 1 - (now - m.born) / LIFE;
+          for (var r = 0; r < rows.length; r++) {
+            for (var c = 0; c < rows[r].length; c++) {
+              var col = m.sp.colors[rows[r][c]];
+              if (!col) continue;
+              ctx.fillStyle = col;
+              ctx.fillRect(x0 + c * px, y0 + r * px, px, px);
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        if (marks.length) requestAnimationFrame(frame); else running = false;
+      }
+    })();
+  </script>
 </body>
 </html>
