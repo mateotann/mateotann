@@ -32,10 +32,21 @@ function getLocation(request) {
   };
 }
 
+function findEnv(endings) {
+  for (const ending of endings) {
+    const key = Object.keys(process.env).find((name) => name.endsWith(ending) && process.env[name]);
+    if (key) {
+      return process.env[key];
+    }
+  }
+  return "";
+}
+
 async function kvRequest(path, options = {}) {
-  // The store is connected in Vercel with the STORAGE_TRACKER prefix; the bare names are the default.
-  const url = process.env.STORAGE_TRACKER_KV_REST_API_URL || process.env.KV_REST_API_URL;
-  const token = process.env.STORAGE_TRACKER_KV_REST_API_TOKEN || process.env.KV_REST_API_TOKEN;
+  // Vercel names these with whatever prefix the store was connected under (KV_REST_API_URL,
+  // STORAGE_TRACKER_KV_REST_API_URL, ...), and it differs per project, so match on the ending.
+  const url = findEnv(["KV_REST_API_URL", "UPSTASH_REDIS_REST_URL"]);
+  const token = findEnv(["KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_TOKEN"]);
 
   if (!url || !token) {
     throw new Error("KV_MISSING");
