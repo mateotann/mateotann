@@ -33,8 +33,9 @@ function getLocation(request) {
 }
 
 async function kvRequest(path, options = {}) {
-  const url = process.env.KV_REST_API_URL;
-  const token = process.env.KV_REST_API_TOKEN;
+  // The store is connected in Vercel with the STORAGE_TRACKER prefix; the bare names are the default.
+  const url = process.env.STORAGE_TRACKER_KV_REST_API_URL || process.env.KV_REST_API_URL;
+  const token = process.env.STORAGE_TRACKER_KV_REST_API_TOKEN || process.env.KV_REST_API_TOKEN;
 
   if (!url || !token) {
     throw new Error("KV_MISSING");
