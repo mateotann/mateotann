@@ -21,8 +21,13 @@
   <meta name="twitter:image" content="https://www.mateotannahill.com/og.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; background: #fff; }
+    html { height: 100%; background: #fff; }
     body {
+      min-height: 100%;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
       color: #111;
       font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -31,7 +36,7 @@
       -webkit-user-select: none;
     }
     main {
-      min-height: 100%;
+      flex: 1 0 auto;
       max-width: 34rem;
       padding: 2rem 1.5rem;
       display: flex;
@@ -40,6 +45,15 @@
       gap: 1rem;
     }
     @media (min-width: 640px) { main { padding: 4rem; } }
+    /* last-visitor line: same font as the page, just smaller and quieter */
+    footer {
+      flex: none;
+      min-height: 1.5em; /* holds its place while the line loads */
+      padding: 0 1.5rem calc(1.25rem + env(safe-area-inset-bottom));
+      font-size: 12px;
+      color: #767676;
+    }
+    @media (min-width: 640px) { footer { padding: 0 4rem 2rem; } }
     /* wireframe placeholders: replace with final copy */
     .ph { color: #9a9a9a; }
     .cam {
@@ -86,6 +100,7 @@
     <p>currently @ <a href="https://www.instagram.com/stanforcreators/" data-trail="stan" target="_blank" rel="noopener">stan</a>, prev @ <a href="https://www.instagram.com/lotus/" data-trail="lotus" target="_blank" rel="noopener">lotus ai</a></p>
     <p data-trail="mail"><a href="mailto:mateotannahill@gmail.com">[mateotannahill@gmail.com]</a></p>
   </main>
+  <footer id="visitor" aria-live="polite"></footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     // my fx3 rig as a spinning 3D model, built from simple shapes (sizes in cm), then pushed
@@ -371,6 +386,30 @@
           for (var i = 0; i < letters.length; i++) letters[i].style.transform = "";
         });
       });
+    })();
+  </script>
+  <script>
+    /* last visitor: asks /api/visitor who was here before this load, and records this one */
+    (function () {
+      var el = document.getElementById("visitor");
+      function ago(iso) {
+        var m = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+        if (!(m >= 1)) return "just now";
+        if (m < 60) return m + "m ago";
+        var h = Math.round(m / 60);
+        if (h < 24) return h + "h ago";
+        return Math.round(h / 24) + "d ago";
+      }
+      fetch("/api/visitor", { method: "POST" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d || !d.stored) return; /* nothing to show: the footer stays blank */
+          var p = d.previous;
+          if (!p || !p.visitedAt) { el.textContent = "no visitors before you yet"; return; }
+          var place = [p.city, p.region, p.country].filter(Boolean).join(", ").toLowerCase();
+          el.textContent = "last visitor from " + (place || "somewhere") + " \u00b7 " + ago(p.visitedAt);
+        })
+        .catch(function () {});
     })();
   </script>
   <canvas id="trail" aria-hidden="true"></canvas>
